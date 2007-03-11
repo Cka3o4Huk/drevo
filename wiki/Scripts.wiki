@@ -1,13 +1,4 @@
-#summary One-sentence summary of this page.
 
-= Introduction =
+== BSD Scripts ==
 
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+* [http://drevo.googlecode.com/files/updateApp.sh Update Applications via ports]
