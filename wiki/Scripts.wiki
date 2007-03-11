@@ -1,4 +1,2 @@
-
-== BSD Scripts ==
-
-* [http://drevo.googlecode.com/files/updateApp.sh Update Applications via ports]
+== BSD Scripts ===
+ # [http://drevo.googlecode.com/files/updateApp.sh Update Applications via ports]
