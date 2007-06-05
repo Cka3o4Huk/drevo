@@ -1,0 +1,10 @@
+Completed List:
+ 1) Improve GUI part (Swing Interface)
+(+)	a) Prepare current stable version
+(+)	f) Check box items for each cell 
+ 
+ 2) Improve EngineManage & Dispatcher for stable work
+(+)	a) Prepare current stable version
+
+ 3) Improve WorkThread
+(+)	a) Prepare current stable version
