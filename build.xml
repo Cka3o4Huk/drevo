@@ -33,7 +33,7 @@ Author: Michail Zhilin
     	<pathelement path="${java.class.path}/"/>
     </path>
 	
-	<property name="STARTUP_CLASS"  value="ru.ixxo.crux.Manager"/>
+	<property name="STARTUP_CLASS"  value="ru.ixxo.crux.manager.Manager"/>
 
     <target name="init">
         <mkdir dir="${COMPILE_DIR}"/>
