@@ -83,6 +83,8 @@ public class MyFrame extends JFrame
 
         this.setJMenuBar(menubar);
 
+
+
         /*DefaultMutableTreeNode top = new DefaultMutableTreeNode("Directory");
 
         DefaultMutableTreeNode a = new DefaultMutableTreeNode("A");
@@ -118,6 +120,16 @@ public class MyFrame extends JFrame
             }
         });    */
 	}
+
+    public void centralize(){
+        Dimension screenSize =
+                Toolkit.getDefaultToolkit().getScreenSize();
+
+        Dimension frameSize = getSize();
+
+        setLocation(screenSize.width / 2 - (frameSize.width / 2),
+                screenSize.height / 2 - (frameSize.height / 2));
+    }
 
     public void drawJTree(JTree jtree)
     {
@@ -168,7 +180,8 @@ public class MyFrame extends JFrame
 
 		validate();
 		pack();
-		repaint();
+
+        repaint();
 	}
     
     public void doMouseClicked(MouseEvent me)

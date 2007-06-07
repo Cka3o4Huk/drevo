@@ -1,11 +1,13 @@
 package ru.ixxo.crux.manager;
 
 import java.util.ArrayList;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JTree;
 
 import ru.ixxo.crux.client.MyFrame;
+import ru.ixxo.crux.client.SplashWindow;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.engine.core.EngineManager;
@@ -50,13 +52,20 @@ public class Manager
         Logger.info = true;
         
         MyFrame mf = new MyFrame(man);
-		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame splashFrame = new JFrame();
+        SplashWindow splash = new SplashWindow("splash.jpg",splashFrame,mf,5000);
+
+        mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mf.setTitle("Swing Interface");
 		//StatusComponent status = new StatusComponent(mf);
         //mf.getContentPane().add(status.getBox(), "South");
 
 		mf.setSize(800,600);
-        mf.setVisible(true);
+
+        mf.centralize();
+
+        if(splash == null)
+            mf.setVisible(true);
         
         String javaPath = System.getProperty("java.class.path", "");
         System.out.println("Java Path = " + javaPath);
