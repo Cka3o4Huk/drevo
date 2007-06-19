@@ -71,11 +71,14 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 			}
 		}
 
+/*
 		JPanel panel = new JPanel();
 		Border border = BorderFactory.createEmptyBorder();
 		panel.setBorder(border);
 		panel.add(new JTextField("MIZH"));		
 		panel.add(leafRenderer);
 		return panel;
+*/
+        return leafRenderer;
 	}
 }
