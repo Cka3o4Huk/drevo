@@ -2,7 +2,15 @@
 
 = Introduction =
 
-Add your content here.
+ToDo: Add your content here.
+
+Job Process:
+
+http://drevo.googlegroups.com/web/ixxo_start.JPG
+
+Results:
+
+http://drevo.googlegroups.com/web/ixxo_finish.JPG
 
 = Details =
 
