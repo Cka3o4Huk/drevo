@@ -1,13 +1,24 @@
 package ru.ixxo.crux.client;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
+
 public class SplashWindow extends JWindow {
 
-    protected Frame mainFrame = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected Frame mainFrame = null;
 
     public void setMainFrameVisible(boolean flag){
         if(mainFrame !=null)

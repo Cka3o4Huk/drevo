@@ -1,7 +1,6 @@
 package ru.ixxo.crux.manager;
 
 import java.util.ArrayList;
-import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JTree;
@@ -9,18 +8,12 @@ import javax.swing.JTree;
 import ru.ixxo.crux.client.MyFrame;
 import ru.ixxo.crux.client.SplashWindow;
 import ru.ixxo.crux.common.Logger;
+
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.engine.core.EngineManager;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Watcher
- * Date: 10.11.2006
- * Time: 21:43:33
- * To change this template use File | Settings | File Templates.
- * $LastChangedDate: 2007-06-05 19:51:29 +0400 (Вт, 05 июн 2007) $
- * $Id: Manager.java 72 2007-06-05 15:51:29Z zhilin $
- * $HeadURL: svn://ipccenter.ru/ncmipt/FSM/branches/experimental/src/ru/mipt/fsm/ixxo/manager/Manager.java $
+ * 
  */
 public class Manager
 {
@@ -92,7 +85,13 @@ public class Manager
         }
     }
 
-    private void handle(MyFrame mf)
+    
+    /**
+     * 
+     * @param mf
+     */
+    @SuppressWarnings("unchecked")
+	private void handle(MyFrame mf)
     {
         synchronized (userFlagMutex) {
 		

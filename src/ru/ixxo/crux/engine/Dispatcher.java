@@ -50,6 +50,7 @@ public class Dispatcher {
 	 *            transmit input and output data
 	 * @return
 	 */
+    @SuppressWarnings("unchecked")
 
 	// public synchronized boolean callInterface(Object obj)
 	public synchronized boolean callInterface(Collection collParams) {
