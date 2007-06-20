@@ -76,7 +76,8 @@ public class EngineManager implements Runnable
         }
 
     }
-
+    
+    @SuppressWarnings("unchecked")
     private void createThreads()
     {    	
         WorkThread wthread;

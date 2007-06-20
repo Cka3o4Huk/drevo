@@ -18,6 +18,7 @@ public class Queue
         list = new Vector();
     }
 
+    @SuppressWarnings("unchecked")
     public void push(Object obj)
     {
         if (obj!=null)

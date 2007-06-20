@@ -35,7 +35,7 @@ public class XMLTreeViewer extends JFrame {
 		this.xmlDoc = doc;
 		xmlDocRootElement = xmlDoc.getRootElement();
 
-		setSize(600, 450);
+		//setSize(600, 450);
 		tn = new DefaultMutableTreeNode("XML");
 		initialize();
 	}
@@ -44,7 +44,7 @@ public class XMLTreeViewer extends JFrame {
 		super();
 		this.xmlDocRootElement = root;
 
-		setSize(600, 450);
+		//setSize(600, 450);
 		tn = new DefaultMutableTreeNode("XML");
 		initialize();
 	}

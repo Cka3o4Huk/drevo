@@ -13,6 +13,7 @@ public class NamedVector extends Vector {
 		this.name = name;
 	}
 
+	@SuppressWarnings("unchecked")
 	public NamedVector(String name, Object elements[]) {
 		this.name = name;
 		for (int i = 0, n = elements.length; i < n; i++) {
