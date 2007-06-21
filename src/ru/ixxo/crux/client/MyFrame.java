@@ -31,6 +31,9 @@ public class MyFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = -666972553160206290L;
 
+	Dimension minimumSize = new Dimension(300,600);
+	Dimension preferredSize = new Dimension(300,600);
+	
 	JTree tree;
 
 	JTextField jtf;
@@ -54,7 +57,10 @@ public class MyFrame extends JFrame {
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(layout);
 
+		setPreferredSize(preferredSize);
+		setMinimumSize(minimumSize);
 		mp = new JPanel(layout);
+		mp.setMinimumSize(minimumSize);
 		mp.setBackground(Color.YELLOW);
 		contentPane.add(mp,SpringLayout.EAST);
 		
@@ -118,23 +124,26 @@ public class MyFrame extends JFrame {
 			int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 			int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
 			jsp = new JScrollPane(tree, v, h);
+			jsp.setMinimumSize(minimumSize);
 			mp.add(jsp);
 
 			jtf = new JTextField("", 20);
 			mp.add(jtf);
 
 			//JScrollPane
+			layout.putConstraint(SpringLayout.SOUTH, jsp, 0, SpringLayout.NORTH, jtf );
 			layout.putConstraint(SpringLayout.NORTH, jsp, 0, SpringLayout.NORTH, mp );
-			layout.putConstraint(SpringLayout.WEST, jsp, 0, SpringLayout.WEST, mp );
 			layout.putConstraint(SpringLayout.EAST, jsp, 0, SpringLayout.EAST, mp );
+			layout.putConstraint(SpringLayout.WEST, jsp, 0, SpringLayout.WEST, mp );
 			
 			//JTextField
 			layout.putConstraint(SpringLayout.SOUTH, jtf, 0, SpringLayout.SOUTH, mp );
 			layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, mp);
+			layout.putConstraint(SpringLayout.WEST, jtf, 0, SpringLayout.WEST, mp );
 			
-			layout.putConstraint(SpringLayout.NORTH, jtf, 5, SpringLayout.SOUTH, tree);
+/*			layout.putConstraint(SpringLayout.NORTH, jtf, 5, SpringLayout.SOUTH, tree);
 			layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, tree);		
-			
+*/			
 //			SpringUtilities.makeCompactGrid(mp,2, 1, 5, 5, 3, 3);
 			
 			layout.putConstraint(SpringLayout.SOUTH, mp, 0, SpringLayout.SOUTH, contentPane);
