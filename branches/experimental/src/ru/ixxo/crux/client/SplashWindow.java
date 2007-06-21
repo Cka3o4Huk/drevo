@@ -55,9 +55,11 @@ public class SplashWindow extends JWindow {
 
         final Runnable closerRunner = new Runnable() {
             public void run() {
-                setVisible(false);
-                setMainFrameVisible(true);
-                dispose();
+                if(isVisible()){
+                	setVisible(false);
+                	setMainFrameVisible(true);
+                	dispose();
+                }
             }
         };
         Runnable waitRunner = new Runnable() {
