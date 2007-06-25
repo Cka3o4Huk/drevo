@@ -9,12 +9,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -22,6 +25,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SpringLayout;
 import javax.swing.tree.TreePath;
 
+import ru.ixxo.crux.client.springlayout.SpringOrder;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.manager.Manager;
 
@@ -34,7 +38,9 @@ public class MyFrame extends JFrame {
 	Dimension minimumSize = new Dimension(300,600);
 	Dimension preferredSize = new Dimension(300,600);
 	
-	JTree tree;
+	JTree tree = null;
+
+	JScrollPane jsp = null;
 
 	JTextField jtf;
 
@@ -45,16 +51,19 @@ public class MyFrame extends JFrame {
 	JMenu menu;
 
 	JPanel mp;
-
-	JScrollPane jsp;
+	
+	JProgressBar progressBar;
 
 	SpringLayout layout;
-
+	SpringOrder order;
+	Container contentPane;
+	
 	public MyFrame(Manager man) {
 		this.man = man;
 		layout = new SpringLayout();
+		order = new SpringOrder(layout);
 		
-		Container contentPane = this.getContentPane();
+		contentPane = this.getContentPane();
 		contentPane.setLayout(layout);
 
 		setPreferredSize(preferredSize);
@@ -69,8 +78,18 @@ public class MyFrame extends JFrame {
 		JMenuItem mi = new JMenuItem("Select Directory");
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO: remake to file chooser
-				String text = JOptionPane.showInputDialog(null,
+				Logger.info("Selection of the directory");
+				String targetDirectory = null;
+				
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);	
+				Logger.info("Show JFileChooser");				
+			    int returnVal = fileChooser.showOpenDialog(MyFrame.this);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	targetDirectory = fileChooser.getSelectedFile().getAbsolutePath();			    
+			    }
+/*
+			    String text = JOptionPane.showInputDialog(null,
 						"Select Directory:", "Select Directory",
 						JOptionPane.QUESTION_MESSAGE);
 				if (text == null) {
@@ -78,9 +97,20 @@ public class MyFrame extends JFrame {
 				}
 
 				else {
-					Logger.info("Text entered: " + text);
-					MyFrame.this.sendDirName(text);
-				}
+*/
+			    if(targetDirectory != null){
+			    	Logger.info("Text entered: " + targetDirectory);
+					MyFrame.this.sendDirName(targetDirectory);
+					createJScroll();
+					enableProgressBar();
+					progressBar.setString("Please wait...");
+					progressBar.setStringPainted(true);					
+					mp.add(progressBar);					
+					mp.setVisible(true);
+					orderJComponents();				
+					MyFrame.this.pack();
+					MyFrame.this.RefreshGUI();
+			    }
 			}
 		});
 		menu.add(mi);
@@ -114,22 +144,97 @@ public class MyFrame extends JFrame {
 				screenSize.height / 2 - (frameSize.height / 2));
 	}
 
-	public void drawJTree(JTree jtree) {
+	protected void createProgressBar(){
+		if(progressBar == null){
+			progressBar = new JProgressBar();		
+		}			
+	}
+	
+	protected void enableProgressBar(){
+		createProgressBar();
+		
+		progressBar.setIndeterminate(true);
+		//progressBar.setMinimumSize(minimumSize);
+		progressBar.setVisible(true);		
+	}
+	
+	protected void disableProgressBar(){
+		if(progressBar!=null){
+			progressBar.setVisible(false);				
+		}
+	}
 
-		Container contentPane = this.getContentPane();
-		// contentPane.setLayout(new BorderLayout());
-
-		if (jsp == null) {
-			tree = jtree;
+	protected void createJScroll(){
+		if(jsp == null){
 			int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 			int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
+	
 			jsp = new JScrollPane(tree, v, h);
 			jsp.setMinimumSize(minimumSize);
+	
 			mp.add(jsp);
+		}
+	}
+	
+	protected void orderJComponents(){
+/*		
+		//JScrollPane
+		layout.putConstraint(SpringLayout.SOUTH, jsp, 0, SpringLayout.NORTH, jtf );
+		layout.putConstraint(SpringLayout.NORTH, jsp, 0, SpringLayout.NORTH, mp );
+		layout.putConstraint(SpringLayout.EAST, jsp, 0, SpringLayout.EAST, mp );
+		layout.putConstraint(SpringLayout.WEST, jsp, 0, SpringLayout.WEST, mp );
+		
+		//JTextField
+		layout.putConstraint(SpringLayout.SOUTH, jtf, 0, SpringLayout.SOUTH, mp );
+		layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, mp);
+		layout.putConstraint(SpringLayout.WEST, jtf, 0, SpringLayout.WEST, mp );
+		
+//			layout.putConstraint(SpringLayout.NORTH, jtf, 5, SpringLayout.SOUTH, tree);
+//		layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, tree);		
+			
+//		SpringUtilities.makeCompactGrid(mp,2, 1, 5, 5, 3, 3);
+		
+		layout.putConstraint(SpringLayout.SOUTH, mp, 0, SpringLayout.SOUTH, contentPane);
+		layout.putConstraint(SpringLayout.EAST, mp, 0, SpringLayout.EAST, contentPane);		
+*/
+		
+		JComponent downComponent = jtf;
+		JComponent upComponent = jsp;
+		
+		if(progressBar!=null && progressBar.isVisible()){
+			downComponent = progressBar;
+		}
+		
+		layout.putConstraint(SpringLayout.SOUTH, upComponent, 0, SpringLayout.NORTH, downComponent );
+		layout.putConstraint(SpringLayout.NORTH, upComponent, 0, SpringLayout.NORTH, mp );
+		layout.putConstraint(SpringLayout.EAST, upComponent, 0, SpringLayout.EAST, mp );
+		layout.putConstraint(SpringLayout.WEST, upComponent, 0, SpringLayout.WEST, mp );
 
+		layout.putConstraint(SpringLayout.SOUTH, downComponent, 0, SpringLayout.SOUTH, mp );
+				
+		order.arrange(downComponent, upComponent, SpringOrder.ORDER_BENEATH, SpringOrder.ARRANGE_BY_BOTH_EDGES);
+		
+		layout.putConstraint(SpringLayout.SOUTH, mp, 0, SpringLayout.SOUTH, contentPane);
+		layout.putConstraint(SpringLayout.EAST, mp, 0, SpringLayout.EAST, contentPane);				
+	}
+	
+	
+	public void drawJTree(JTree jtree) {
+
+//		Container contentPane = this.getContentPane();
+		// contentPane.setLayout(new BorderLayout());
+
+		if (tree == null) {
+			Logger.info("Setting new tree");
+			tree = jtree;
+
+			createJScroll();
+			jsp.setViewportView(tree);
+			disableProgressBar();
+			
 			jtf = new JTextField("", 20);
 			mp.add(jtf);
-
+/*
 			//JScrollPane
 			layout.putConstraint(SpringLayout.SOUTH, jsp, 0, SpringLayout.NORTH, jtf );
 			layout.putConstraint(SpringLayout.NORTH, jsp, 0, SpringLayout.NORTH, mp );
@@ -140,15 +245,16 @@ public class MyFrame extends JFrame {
 			layout.putConstraint(SpringLayout.SOUTH, jtf, 0, SpringLayout.SOUTH, mp );
 			layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, mp);
 			layout.putConstraint(SpringLayout.WEST, jtf, 0, SpringLayout.WEST, mp );
-			
-/*			layout.putConstraint(SpringLayout.NORTH, jtf, 5, SpringLayout.SOUTH, tree);
-			layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, tree);		
-*/			
+//			
+//			layout.putConstraint(SpringLayout.NORTH, jtf, 5, SpringLayout.SOUTH, tree);
+//			layout.putConstraint(SpringLayout.EAST, jtf, 0, SpringLayout.EAST, tree);		
+//			
 //			SpringUtilities.makeCompactGrid(mp,2, 1, 5, 5, 3, 3);
 			
 			layout.putConstraint(SpringLayout.SOUTH, mp, 0, SpringLayout.SOUTH, contentPane);
 			layout.putConstraint(SpringLayout.EAST, mp, 0, SpringLayout.EAST, contentPane);
-
+*/			
+			orderJComponents();
 			
 			tree.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent me) {
@@ -172,11 +278,16 @@ public class MyFrame extends JFrame {
 
 	public void RefreshGUI() {
 
-		mp.invalidate();
-		menu.invalidate();
-		menubar.invalidate();
-		tree.invalidate();
-		jsp.invalidate();
+		if(mp!=null)
+			mp.invalidate();
+		if(menu!=null)
+			menu.invalidate();
+		if(menubar!=null)
+			menubar.invalidate();
+		if(tree!=null)
+			tree.invalidate();
+		if(jsp!=null)
+			jsp.invalidate();
 
 		invalidate();
 
