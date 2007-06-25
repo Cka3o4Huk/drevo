@@ -1,4 +1,4 @@
-package ru.ixxo.crux.client;
+package ru.ixxo.crux.client.springlayout;
 
 import javax.swing.*;
 import javax.swing.SpringLayout;

@@ -103,7 +103,7 @@ public class MyFrame extends JFrame {
 					MyFrame.this.sendDirName(targetDirectory);
 					createJScroll();
 					enableProgressBar();
-					progressBar.setString("Please wait...");
+					progressBar.setString("Please wait. Process can occupy some minutes");
 					progressBar.setStringPainted(true);					
 					mp.add(progressBar);					
 					mp.setVisible(true);
