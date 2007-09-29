@@ -1,5 +1,6 @@
-#summary Проект Ixxo
+#summary Мониторинг пространства внешних носителей
 #labels Language-Russian,Featured,Phase-Design
+#pagename Проект Ixxo
 
 = Введение =
 
