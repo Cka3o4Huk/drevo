@@ -1,0 +1,14 @@
+#summary Проект Ixxo
+#labels Language-Russian,Featured,Phase-Design
+
+= Введение =
+
+Add your content here.
+
+= Процесс работы =
+
+http://drevo.googlegroups.com/web/ixxo_start.jpg
+
+= Результаты =
+
+http://drevo.googlegroups.com/web/ixxo_finish.jpg
