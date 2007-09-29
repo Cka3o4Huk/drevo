@@ -1,4 +1,5 @@
 #summary Ixxo Project
+#labels Language-English,Featured,Phase-Design
 
 = Introduction =
 
@@ -11,10 +12,3 @@ http://drevo.googlegroups.com/web/ixxo_start.jpg
 Results :
 
 http://drevo.googlegroups.com/web/ixxo_finish.jpg
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
