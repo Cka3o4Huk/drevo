@@ -1,10 +1,4 @@
-#summary Ixxo Project
 #labels Language-English,Featured,Phase-Design
-
-= Introduction =
-
-ToDo : Add your content here.
-
 Job Process :
 
 http://drevo.googlegroups.com/web/ixxo_start.jpg
