@@ -41,3 +41,7 @@
 {{{
 ant run
 }}}
+ # Как пользоваться SVN?
+   * Ссылка на репозиторий для мемберов: [https://drevo.googlecode.com/svn/ https://drevo.googlecode.com/svn]. 
+   * Ссылка на репозиторий только на чтение: [http://drevo.googlecode.com/svn/ http://drevo.googlecode.com/svn/]. 
+   Есть хороший help в программке TortoiseSVN по работе с SVN-ом. Ссылка на переведенный help в Инете: http://tortoisesvn.net/docs/release/TortoiseSVN_ru/index.html
