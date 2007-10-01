@@ -1,4 +1,4 @@
-#summary Часто задаваемые вопросы.
+#summary Часто задаваемые вопросы
 #labels Language-Russian
 
 = FAQ по проекту Ixxo =
