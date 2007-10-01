@@ -1,13 +1,43 @@
-#summary Frequently Asked Questions
-#labels Language-English
+#summary Часто задаваемые вопросы.
+#labels Language-Russian
 
-= Frequently Asked Questions =
+= FAQ по проекту Ixxo =
 
-Add your content here.
+Ссылки:
+ * [http://drevo.googlecode.com/svn/branches/experimental Код]
+ * [http://code.google.com/p/drevo/issues/list Задачки]
+ 
+=== О проекте ===
+ # А можно по-подробнее про проект? 
+  Если в общем, то программа, которая будет помогать делать анализ
+  простанства в некотором участке файловой системы. Если более детально,
+  то необходимо реализовать сбор информации следующей: какие папки и
+  файлы существует под определенной директорией, вывести на экран для
+  файла его размер, для директории сколько в байтах занимает ее
+  содержимое.
+ # Что такое трэкер?
+  Трекер - среда, которая позволяет отслеживать что-нибудь. В нашем
+  случаи это задачки, которые весят на закладке issues.
+ # Что такое SVN?
+  SVN - репозиторий кода, аналогичный CVS-у. Основная задача - source
+  control. Каждому изменению кода сопоставляется свой revision id,
+  который определен на уровне всего репозитория. Поподробнее об этом -
+  http://subversion.tigris.org/
+  Там есть и классная программка по работе с репозиторием (TortoiseSVN).
+  http://code.google.com/p/drevo/source - здесь описано как получить
+  доступ к svn-у. Там же моно и сгенерить себе пароль.
+ # По ссылке задачки не нашёл ни одной задачки с разбалловкой.
+  Пишите какие задачки не разбаллованы, сделаем.
+ # Что такое Milestone?
+  Milestone - некоторый этап в жизни программы. Что-то типо версии.
+  Каждая задачка относится к какому-либо Milestone-у. Также это столбец на закладке Issues.
 
-= Questions: =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+=== Вспомогательные средства ===
+ # Что требуется для компиляции и запуска?
+   * JRE(JDK) 1.5 ([http://java.sun.com/javase/downloads/index.jsp Sun JDK])
+   * Ant 1.6.1 ([http://ant.apache.org/ Apache Ant])
+ # Как запустить?
+  В папке braches/experimental запускаем следующую команду:
+{{{
+ant run
+}}}
