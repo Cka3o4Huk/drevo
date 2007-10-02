@@ -194,11 +194,18 @@ public class Dispatcher {
 			
 			Logger.log("Processing Source Directory = " + sourceFileName);
 
-			XPath findDirectory = XPath.newInstance(".//Directory[@fileName=\""
-					+ sourceFileName + "\"]");
-
-			Element sourceElement = (Element) findDirectory
+			XPath findDirectory = null;
+			try{
+			findDirectory = XPath.newInstance(".//Directory[@fileName='"
+					+ sourceFileName + "']");
+			}catch(Exception e){ 
+				System.out.println("Error opening directory: "+sourceFileName);
+			}
+			Element sourceElement = null;
+			if (findDirectory!=null){
+				sourceElement = (Element) findDirectory
 					.selectSingleNode(resultTree);
+			}
 			if (sourceElement == null) {
 				Logger.info("Directory don't found in main tree");
 				continue;
