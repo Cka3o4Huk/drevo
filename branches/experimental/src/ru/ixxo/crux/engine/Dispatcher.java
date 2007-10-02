@@ -191,11 +191,11 @@ public class Dispatcher {
 		while (it.hasNext()) {
 			Element entity = (Element) it.next();
 			String sourceFileName = entity.getAttributeValue("fileName");
-
+			
 			Logger.log("Processing Source Directory = " + sourceFileName);
 
-			XPath findDirectory = XPath.newInstance(".//Directory[@fileName='"
-					+ sourceFileName + "']");
+			XPath findDirectory = XPath.newInstance(".//Directory[@fileName=\""
+					+ sourceFileName + "\"]");
 
 			Element sourceElement = (Element) findDirectory
 					.selectSingleNode(resultTree);
