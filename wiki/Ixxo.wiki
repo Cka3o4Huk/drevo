@@ -1,10 +1,13 @@
 #labels Language-English,Featured,Phase-Design
-Model :
+=== Model ===
 
 [http://drevo.googlecode.com/svn/wiki/fsm_flows.PNG]
 
-Screenshots :
+=== Screenshots ===
+File System:
 
-[http://drevo.googlecode.com/svn/wiki/ixxo_tree.jpg] [http://drevo.googlecode.com/svn/wiki/ixxo_logging.jpg]
+[http://drevo.googlecode.com/svn/wiki/ixxo_tree.jpg] 
 
+Logging:
 
+[http://drevo.googlecode.com/svn/wiki/ixxo_logging.jpg]
