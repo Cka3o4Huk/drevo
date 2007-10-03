@@ -1,12 +1,12 @@
 #labels Language-English,Featured,Phase-Design
-Job Process :
-
-http://drevo.googlegroups.com/web/ixxo_start.jpg
-
-Results :
-
-http://drevo.googlegroups.com/web/ixxo_finish.jpg
-
-Flows:
+Model :
 
 [http://drevo.googlecode.com/svn/wiki/fsm_flows.PNG]
+
+Screenshots :
+
+[http://drevo.googlegroups.com/web/ixxo_tree.jpg] [http://drevo.googlegroups.com/web/ixxo_logging.jpg]
+
+
+
+
