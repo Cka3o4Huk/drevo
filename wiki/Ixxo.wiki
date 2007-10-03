@@ -5,8 +5,6 @@ Model :
 
 Screenshots :
 
-[http://drevo.googlegroups.com/web/ixxo_tree.jpg] [http://drevo.googlegroups.com/web/ixxo_logging.jpg]
-
-
+[http://drevo.googlecode.com/svn/wiki/ixxo_tree.jpg] [http://drevo.googlecode.com/svn/wiki/ixxo_logging.jpg]
 
 
