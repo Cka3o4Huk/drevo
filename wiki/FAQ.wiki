@@ -41,9 +41,12 @@
    * JRE(JDK) 1.5 ([http://java.sun.com/javase/downloads/index.jsp Sun JDK])
    * Ant 1.6.1 ([http://ant.apache.org/ Apache Ant])
  # Как запустить?
-  В папке braches/experimental запускаем следующую команду:
+  В папке braches/experimental есть etalon_start.(cmd|sh) . Сделайте его копию как start.(cmd|sh), подредактируйте его, если надо, и запускаем следующую команду:
 {{{
-ant run
+  Windows:
+start.cmd
+  Unix:
+./start.sh
 }}}
  # Как пользоваться SVN?
    * Ссылка на репозиторий для мемберов: [https://drevo.googlecode.com/svn/ https://drevo.googlecode.com/svn]. 
