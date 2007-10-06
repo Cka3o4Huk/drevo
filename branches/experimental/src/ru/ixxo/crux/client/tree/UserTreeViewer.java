@@ -1,16 +1,16 @@
 package ru.ixxo.crux.client.tree;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 
-import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
-import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeEditor;
-import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeRenderer;
+import ru.ixxo.crux.client.tree.enhance.*;
 
-public class UserTreeViewer extends XMLTreeViewer {
+public class UserTreeViewer extends XMLTreeViewer 
+{
 
 	/**
 	 * 
@@ -27,12 +27,20 @@ public class UserTreeViewer extends XMLTreeViewer {
 
 	protected CheckBoxNodeRenderer renderer;
 
-	protected void initialize() {
+	protected void initialize(){
 		super.initialize();
+		
 		renderer = new CheckBoxNodeRenderer();
 		xmlTree.setCellRenderer(renderer);
 		xmlTree.setCellEditor(new CheckBoxNodeEditor(xmlTree));
 		xmlTree.setEditable(true);
+		
+		DefaultTreeModel model = (DefaultTreeModel) xmlTree.getModel();
+		
+		if(((DefaultMutableTreeNode)model.getRoot()).getChildCount() == 1){
+			tn = ((DefaultMutableTreeNode)model.getRoot()).getNextNode();
+			((DefaultTreeModel) xmlTree.getModel()).setRoot(tn); 
+		}
 	}
 
 	protected DefaultMutableTreeNode generateNodeByElement(Element element) {
@@ -44,7 +52,8 @@ public class UserTreeViewer extends XMLTreeViewer {
 		String fileName = element.getAttributeValue("fileName");
 
 		if (fileName == null) {
-			nodeName = "";
+//			nodeName = "";
+			return null;
 		} else {
 			int index = fileName.lastIndexOf("/");
 

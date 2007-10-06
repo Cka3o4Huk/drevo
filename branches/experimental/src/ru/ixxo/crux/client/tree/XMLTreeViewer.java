@@ -112,17 +112,20 @@ public class XMLTreeViewer extends JFrame {
 	private void processElement(Element el, DefaultMutableTreeNode dmtn) {
 
 		DefaultMutableTreeNode currentNode = generateNodeByElement(el);
+		
 		if (currentNode != null) {
 			processAttributes(el, currentNode);
-
-			Iterator children = el.getChildren().iterator();
-
-			while (children.hasNext()) {
-				processElement((Element) children.next(), currentNode);
-			}
-
-			dmtn.add(currentNode);
+			dmtn.add(currentNode);			
+		}else{
+			currentNode = dmtn;
 		}
+
+		Iterator children = el.getChildren().iterator();
+		
+		while (children.hasNext()) {
+			processElement((Element) children.next(), currentNode);
+		}
+
 	}
 
 	protected void processAttributes(Element el, DefaultMutableTreeNode dmtn) {

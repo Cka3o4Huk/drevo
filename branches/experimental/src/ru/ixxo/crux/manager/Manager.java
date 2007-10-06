@@ -25,6 +25,8 @@ public class Manager
     protected Dispatcher disp;
     protected EngineManager em;
 
+    protected boolean enforceReloadTree = false;
+    
     public Manager()
     {
         this.engflag=false;
@@ -94,8 +96,8 @@ public class Manager
 	private void handle(MyFrame mf)
     {
         synchronized (userFlagMutex) {
-		
-	    	Object obj = new Boolean(userflag);
+//		
+//	    	Object obj = new Boolean(userflag);
 	
 	        ArrayList sendParameters = new ArrayList();
 	        
@@ -114,43 +116,74 @@ public class Manager
 	        /**
 	         * If task was completed then manager should make request tree
 	         */
-	        if (newEngFlag != engflag && newEngFlag){
-	        	/**
-	        	 * Tree Request
-	        	 */        		        
-	        	
-	        	sendParameters.clear();
-	        	sendParameters.add(Boolean.TRUE);
-		        params = (ArrayList) sendParameters.clone();	        	
-	        	disp.callInterface(params);
-	        }
-	        
-	        ArrayList receivedParameters = params;
-	        
-	        obj = (receivedParameters!=null && receivedParameters.size() > 0) ? 
-	        		 receivedParameters.toArray()[0] : null;	
-	        		 
-	        if (newEngFlag != engflag)
-	        {
-	        	Logger.info("Status changed to "+newEngFlag);
-	        	if (obj != null && newEngFlag)
-	            {
-	        		Logger.info("Drawing new tree");
-	        		mf.drawJTree((JTree) obj);
-	                if(!mf.isDisplayable()){
-	                	mf.setVisible(true);
-	                }
-	        		mf.RefreshGUI();
-	            }
-	            
-	            engflag = newEngFlag;
-	        	//mf.completed();
-	        }
+	        if (newEngFlag != engflag) {
+
+				if (newEngFlag) {
+					/**
+					 * Tree Request
+					 */
+
+					JTree tree = requestTree();
+
+					if (tree != null)
+						repaintTree(mf, tree);
+				}
+
+				engflag = newEngFlag;
+			}
+	        else if(enforceReloadTree)
+			{
+				JTree tree = requestTree();
+
+				if (tree != null)
+					repaintTree(mf, tree);
+				
+				enforceReloadTree = false;
+			}
 	        
 	        userflag = false;
         }
     }
-
+    
+    public JTree requestTree()
+    {
+        ArrayList sendParameters = new ArrayList();
+        ArrayList params;
+        ArrayList receivedParameters;
+        
+    	sendParameters.clear();
+    	sendParameters.add(Boolean.TRUE);
+    	params = (ArrayList) sendParameters.clone();	       	
+    	disp.callInterface(params);
+    	
+    	receivedParameters = params;
+        Object obj = (receivedParameters!=null && receivedParameters.size() > 0) ? 
+       		 receivedParameters.toArray()[0] : null;	
+       		 
+        return (obj != null && obj instanceof JTree)? (JTree) obj: null;
+    }
+    
+    protected void repaintTree(MyFrame mf, JTree tree){
+		mf.drawJTree(tree);
+        if(!mf.isDisplayable()){
+        	mf.setVisible(true);
+        }
+		mf.RefreshGUI();
+    }
+    
+    public void changeTreeView(int viewMode)
+    {
+    	if(disp.viewMode != viewMode){
+    		disp.viewMode = viewMode;
+    		reloadTree();
+    	}
+    }
+    
+    public void reloadTree()
+    {
+    	enforceReloadTree = true;
+    }
+    	
     protected void shutDown()
     {
         em.interruptThreads();

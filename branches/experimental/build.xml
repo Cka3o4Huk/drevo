@@ -59,7 +59,7 @@ Author: Michail Zhilin
     </target>
 
     <target name="run" depends="build,clean">        	
-        <java classname="${STARTUP_CLASS}" fork="true">   
+	    <java classname="${STARTUP_CLASS}" maxmemory="256m" error="error.log" fork="true">   
         	<classpath refid="project.class.path"/>
     	</java>    	
     </target>
