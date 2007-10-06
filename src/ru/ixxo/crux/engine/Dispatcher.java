@@ -17,7 +17,8 @@ import ru.ixxo.crux.common.Logger;
  * Created by IntelliJ IDEA. User: Watcher Date: 02.12.2006 Time: 0:29:52 To
  * change this template use File | Settings | File Templates.
  */
-public class Dispatcher {
+public class Dispatcher 
+{
 	private boolean flag;
 
 	private Queue queue;
@@ -31,7 +32,13 @@ public class Dispatcher {
 	private Element resultTree;
 
 	private final static String treeMutex = "TreeMutex";
-
+	
+	public static final int XML_VIEW = 1;
+	public static final int USER_VIEW = 2;
+	public static final int UNDEF_VIEW = 0;
+	
+	public int viewMode = UNDEF_VIEW;
+	
 	public Dispatcher(String dirname) {
 		resultTree = new Element("Root");
 		this.flag = false;
@@ -107,13 +114,18 @@ public class Dispatcher {
 					// JTree result = new JTree(tree);
 					XMLTreeViewer viewer;
 
-					if (Logger.debug) {
-						Logger.info("XML Interface");
-						viewer = new XMLTreeViewer(resultTree);
-					} else {
-						Logger.info("User Interface");
-						viewer = new UserTreeViewer(resultTree);
+					if (((viewMode == UNDEF_VIEW) && (Logger.debug)) 
+							|| (viewMode == XML_VIEW))
+					{
+							Logger.info("XML Interface");
+							viewer = new XMLTreeViewer(resultTree);
+					} 
+					else
+					{
+							Logger.info("User Interface");
+							viewer = new UserTreeViewer(resultTree);
 					}
+						
 					collParams.add(viewer.getJTree());
 				}
 

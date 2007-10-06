@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -27,6 +30,7 @@ import javax.swing.tree.TreePath;
 
 import ru.ixxo.crux.client.springlayout.SpringOrder;
 import ru.ixxo.crux.common.Logger;
+import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.manager.Manager;
 
 public class MyFrame extends JFrame {
@@ -114,7 +118,7 @@ public class MyFrame extends JFrame {
 			}
 		});
 		menu.add(mi);
-
+		
 		mi = new JMenuItem("Exit");
 		mi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -126,6 +130,8 @@ public class MyFrame extends JFrame {
 
 		menubar.add(menu);
 
+		initOptionsMenu(menubar);
+		
 		menu = new JMenu("Help");
 		mi = new JMenuItem("About");
 
@@ -135,6 +141,48 @@ public class MyFrame extends JFrame {
 		this.setJMenuBar(menubar);
 	}
 
+	final String DEV_XML_VIEW = "Developer XML View";
+	final String USR_VIEW = "User-friendly View";
+	
+	public void initOptionsMenu(JMenuBar menubar){
+		JMenu menu = new JMenu("Options");
+		JMenu subMenu = new JMenu("Tree View");		
+		ButtonGroup group = new ButtonGroup();
+		ButtonModel selected;
+		
+	    ActionListener actionPrinter = new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	          try {
+	        	  String strCmd = e.getActionCommand();
+	        	  if(DEV_XML_VIEW.equalsIgnoreCase(strCmd)){
+	        		  man.changeTreeView(Dispatcher.XML_VIEW);
+	        	  }
+	        	  if(USR_VIEW.equalsIgnoreCase(strCmd)){
+	        		  man.changeTreeView(Dispatcher.USER_VIEW);
+	        	  }	        	  
+	          } catch (Exception ex) {
+	            ex.printStackTrace();
+	          }
+	        }
+	      };
+
+		JRadioButtonMenuItem radioItem = new JRadioButtonMenuItem(DEV_XML_VIEW);		
+		radioItem.addActionListener(actionPrinter);
+		group.add(radioItem);
+		subMenu.add(radioItem);
+		
+		radioItem = new JRadioButtonMenuItem(USR_VIEW);
+		radioItem.addActionListener(actionPrinter);
+		selected = radioItem.getModel();
+		group.add(radioItem);
+		subMenu.add(radioItem);		
+		
+		menu.add(subMenu);
+		group.setSelected(selected, true);
+		
+		menubar.add(menu);
+	}
+	
 	public void centralize() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 

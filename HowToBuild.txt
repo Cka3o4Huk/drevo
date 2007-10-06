@@ -6,7 +6,10 @@ Steps to run:
  1) svn update
 Win32:
  2) copy etalon_start.cmd as start.cmd
- 3) edit start.cmd if it's neccesery
+ 3) edit start.cmd if it's necessary
  4) run "start.cmd"
 Unix: 
- 2) ant run
+ 2) copy etalon_start.sh as start.sh
+ 3) edit start.sh if it's necessary
+ 4) add execution rights if it's necessary
+ 4) run "./start.sh"
