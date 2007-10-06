@@ -2,6 +2,11 @@ Requirements:
  JRE/JDK >= 1.5.0 (http://java.sun.com)
  Ant (recommended >=1.6) (http://ant.apache.org)
  
-Steps to build:
+Steps to run:
  1) svn update
- 2) ant build
+Win32:
+ 2) copy etalon_start.cmd as start.cmd
+ 3) edit start.cmd if it's neccesery
+ 4) run "start.cmd"
+Unix: 
+ 2) ant run
