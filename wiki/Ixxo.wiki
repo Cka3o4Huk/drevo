@@ -1,4 +1,14 @@
 #labels Language-English,Featured,Phase-Design
+=== Goal ===
+
+Create Java Monitor for file systems to collect info about spacing, fragmentation, load and etc. 
+
+=== Features ===  
+ToDo:
+
+ * Provides GUI and Integration interfaces. 
+ * Plugins for different collection tasks
+
 === Model ===
 
 [http://drevo.googlecode.com/svn/wiki/fsm_flows.PNG]
