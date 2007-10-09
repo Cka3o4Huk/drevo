@@ -50,7 +50,7 @@ public class EvaluateFileSize implements Task {
     	
     	if(xmlElement==null) return null;
     	
-    	String fileName = xmlElement.getAttributeValue("fileName");
+    	String fileName = URLEncoder.encode(xmlElement.getAttributeValue("fileName"));
 
     	Logger.log("Evaluate Size for "+fileName);
     	
@@ -80,7 +80,7 @@ public class EvaluateFileSize implements Task {
 	            {
 	                subDirectory = sub.getAbsolutePath();
 	                Element subDirElem = new Element("File");
-	                subDirElem.setAttribute("fileName", subDirectory);
+	                subDirElem.setAttribute("fileName", URLEncoder.encode(subDirectory));
 	                subDirElem.setAttribute("size", ""+sub.length());
 	                xmlResult.addContent(subDirElem);
 	
