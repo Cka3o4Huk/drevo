@@ -51,7 +51,7 @@ public class Manager
         SplashWindow splash = new SplashWindow("splash.jpg",splashFrame,mf,5000);
 
         mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mf.setTitle("Swing Interface");
+		mf.setTitle("Ixxo File System Monitor");
 		//StatusComponent status = new StatusComponent(mf);
         //mf.getContentPane().add(status.getBox(), "South");
 
