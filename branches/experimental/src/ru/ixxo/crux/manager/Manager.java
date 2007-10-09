@@ -1,6 +1,8 @@
 package ru.ixxo.crux.manager;
 
+import java.awt.Image;
 import java.util.ArrayList;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JTree;
@@ -52,6 +54,9 @@ public class Manager
 
         mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mf.setTitle("Ixxo File System Monitor");
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image icon= toolkit.getImage("icon.jpg");
+		mf.setIconImage(icon);
 		//StatusComponent status = new StatusComponent(mf);
         //mf.getContentPane().add(status.getBox(), "South");
 
