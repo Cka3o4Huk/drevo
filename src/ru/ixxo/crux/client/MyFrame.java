@@ -323,6 +323,8 @@ public class MyFrame extends JFrame {
 			tree.setVisible(false);
 			jtree.setVisible(true);
 			tree = jtree;
+			disableProgressBar();
+			jtf.setVisible(true);
 		}
 	}
 

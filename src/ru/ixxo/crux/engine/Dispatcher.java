@@ -42,7 +42,8 @@ public class Dispatcher
 	public int viewMode = UNDEF_VIEW;
 	
 	public Dispatcher(String dirname) {
-		resultTree = new Element("Root");
+		if(resultTree==null)
+			resultTree = new Element("Root");
 		this.flag = false;
 		queue = new Queue();
 		queue.push(dirname);
