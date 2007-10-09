@@ -1,7 +1,8 @@
 package ru.ixxo.crux.engine.core;
 
 import org.jdom.Element;
-
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.engine.core.tasks.EvaluateFileSize;
@@ -45,7 +46,7 @@ public class WorkThread implements Runnable {
 			Element taskElement = new Element("Task");
 			Element entityElement = new Element("Entity");
 
-			entityElement.setAttribute("fileName", dirname);
+			entityElement.setAttribute("fileName", URLEncoder.encode(dirname));
 			taskElement.addContent(entityElement);
 			EvaluateFileSize newTask = new EvaluateFileSize(taskElement);
 
