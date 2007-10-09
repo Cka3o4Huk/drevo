@@ -104,7 +104,7 @@ public class Dispatcher
 				dutycount = 0;
 				flag = true;
 				completed = false;
-				Logger.info("Add to process following folder:" + dirname);
+				Logger.log("Add to process following folder:" + dirname);
 				return false;
 			} else if((obj != null) && (obj instanceof Boolean) && (Boolean.TRUE.equals(obj))){
 				// Logger.log("Tree request");
@@ -220,8 +220,6 @@ public class Dispatcher
 				sourceElement = (Element) findDirectory
 					.selectSingleNode(resultTree);
 			}
-			Logger.info("\n"+new XMLOutputter().outputString(resultTree)+"\n");
-			Logger.info(new XMLOutputter().outputString(result)+"\n");
 			if (sourceElement == null) {
 				Logger.info("Directory don't found in main tree"+resultTree.toString());
 	
