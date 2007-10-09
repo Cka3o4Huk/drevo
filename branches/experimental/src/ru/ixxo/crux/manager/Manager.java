@@ -24,11 +24,16 @@ public class Manager
     private boolean userflag;
     public  String dirname;
     //protected DefaultMutableTreeNode tree;
-    protected Dispatcher disp;
+    private Dispatcher disp;
     protected EngineManager em;
 
     protected boolean enforceReloadTree = false;
     
+    private Dispatcher getDispatcher(){
+    	if (disp==null)
+    		disp=new Dispatcher(null);
+    	return disp;
+    }
     public Manager()
     {
         this.engflag=false;
@@ -63,7 +68,7 @@ public class Manager
 		mf.setSize(800,600);
 
         mf.centralize();
-
+        
         if(splash == null)
             mf.setVisible(true);
         
@@ -72,8 +77,7 @@ public class Manager
 
         try
         {
-            man.disp = new Dispatcher(null);
-            man.em = new EngineManager(man.disp);
+            man.em = new EngineManager(man.getDispatcher());
 
         	while (true)
             {
@@ -94,7 +98,7 @@ public class Manager
         }
     }
 
-    
+
     /**
      * 
      * @param mf
@@ -129,8 +133,7 @@ public class Manager
 					/**
 					 * Tree Request
 					 */
-
-					JTree tree = requestTree();
+						JTree tree = requestTree();
 
 					if (tree != null)
 						repaintTree(mf, tree);
