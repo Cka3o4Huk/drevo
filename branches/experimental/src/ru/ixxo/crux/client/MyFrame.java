@@ -208,7 +208,7 @@ public class MyFrame extends JFrame {
 	
 	protected void disableProgressBar(){
 		if(progressBar!=null){
-			progressBar.setVisible(false);				
+			progressBar.setVisible(false);	
 		}
 	}
 
@@ -281,6 +281,8 @@ public class MyFrame extends JFrame {
 			disableProgressBar();
 			
 			jtf = new JTextField("", 20);
+			jtf.setEditable(false);
+			jtf.setVisible(true);
 			mp.add(jtf);
 /*
 			//JScrollPane
