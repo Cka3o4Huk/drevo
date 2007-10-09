@@ -78,12 +78,14 @@ public class Manager
         }
         catch (RuntimeException e)
         {
-            System.out.println("Manager interrupted!!!");
+            System.out.println("Runtime: Manager interrupted!!!");
             e.printStackTrace();
+	    Logger.log(e.toString());
         }
         catch (Exception e) {
-            System.out.println("Manager interrupted!!!");
+            System.out.println("Exception: Manager interrupted!!!");
             e.printStackTrace();
+	    Logger.log(e.toString());
         }
     }
 

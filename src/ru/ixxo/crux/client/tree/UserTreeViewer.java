@@ -3,6 +3,9 @@ package ru.ixxo.crux.client.tree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import java.net.URLEncoder;
+import java.net.URLDecoder;
+
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -49,12 +52,14 @@ public class UserTreeViewer extends XMLTreeViewer
 			return null;
 
 		String nodeName;
-		String fileName = element.getAttributeValue("fileName");
+		String encodedName = element.getAttributeValue("fileName");
 
-		if (fileName == null) {
+		if (encodedName == null) {
 //			nodeName = "";
 			return null;
 		} else {
+			String fileName = URLDecoder.decode(encodedName);
+
 			int index = fileName.lastIndexOf("/");
 
 			if (index > -1) {
