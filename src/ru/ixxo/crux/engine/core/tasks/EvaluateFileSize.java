@@ -3,7 +3,8 @@ package ru.ixxo.crux.engine.core.tasks;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-
+import java.net.URLEncoder;
+import java.net.URLDecoder;
 import org.jdom.Element;
 
 import ru.ixxo.crux.common.Logger;

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
+import org.jdom.output.XMLOutputter;
 
 import ru.ixxo.crux.client.tree.UserTreeViewer;
 import ru.ixxo.crux.client.tree.XMLTreeViewer;
@@ -95,7 +97,7 @@ public class Dispatcher
 				 */
 				Element directory = new Element("Directory");
 
-				directory.setAttribute("fileName", dirname);
+				directory.setAttribute("fileName", URLEncoder.encode(dirname));
 				resultTree.addContent(directory);
 
 				queue.push(dirname);
@@ -181,7 +183,7 @@ public class Dispatcher
 			Object retobj = queue.pop();
 			if (retobj != null)
 				dutycount++;
-
+				Logger.info("Que-fileName: "+(String) retobj+"\n");
 			return (String) retobj;
 		}
 	}
@@ -209,17 +211,20 @@ public class Dispatcher
 			XPath findDirectory = null;
 			try{
 			findDirectory = XPath.newInstance(".//Directory[@fileName='"
-					+ sourceFileName + "']");
+					+sourceFileName+ "']");
 			}catch(Exception e){ 
-				System.out.println("Error opening directory: "+sourceFileName);
+				Logger.info("Error opening directory: "+sourceFileName);
 			}
 			Element sourceElement = null;
 			if (findDirectory!=null){
 				sourceElement = (Element) findDirectory
 					.selectSingleNode(resultTree);
 			}
+			Logger.info("\n"+new XMLOutputter().outputString(resultTree)+"\n");
+			Logger.info(new XMLOutputter().outputString(result)+"\n");
 			if (sourceElement == null) {
-				Logger.info("Directory don't found in main tree");
+				Logger.info("Directory don't found in main tree"+resultTree.toString());
+	
 				continue;
 			}
 
@@ -230,7 +235,7 @@ public class Dispatcher
 				Iterator directoryIt = directories.iterator();
 				while (directoryIt.hasNext()) {
 					Element directory = (Element) directoryIt.next();
-					String fileName = directory.getAttributeValue("fileName");
+					String fileName = URLDecoder.decode(directory.getAttributeValue("fileName"));
 					queue.push(fileName);
 					directory.detach();
 				}
