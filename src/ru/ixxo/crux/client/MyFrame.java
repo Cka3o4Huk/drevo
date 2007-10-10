@@ -277,7 +277,7 @@ public class MyFrame extends JFrame {
 			tree = jtree;
 
 			createJScroll();
-			jsp.setViewportView(tree);
+			jsp.setViewportView(jtree);
 			disableProgressBar();
 			
 			jtf = new JTextField("", 20);
@@ -306,7 +306,7 @@ public class MyFrame extends JFrame {
 */			
 			orderJComponents();
 			
-			tree.addMouseListener(new MouseAdapter() {
+			jtree.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent me) {
 					doMouseClicked(me);
 				}
@@ -314,15 +314,14 @@ public class MyFrame extends JFrame {
 
 			jtree.setVisible(true);
 
-			TreePath path = new TreePath(tree);
-			tree.makeVisible(path);
+			TreePath path = new TreePath(jtree);
+			jtree.makeVisible(path);
 			mp.setVisible(true);
 			pack();
 		} else {
 			jsp.setViewportView(jtree);
-			tree.setVisible(false);
+			jtree.setVisible(false);
 			jtree.setVisible(true);
-			tree = jtree;
 			disableProgressBar();
 			jtf.setVisible(true);
 		}

@@ -21,7 +21,7 @@ public class XMLTreeViewer extends JFrame {
 	private static final long serialVersionUID = -738722273625654365L;
 
 	// The JTree to display the XML
-	protected static JTree xmlTree;
+	protected static JTree xmlTree=null;
 
 	// The XML document to be output to the JTree
 	protected Document xmlDoc;
