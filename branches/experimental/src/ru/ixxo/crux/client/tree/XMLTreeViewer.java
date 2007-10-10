@@ -21,7 +21,7 @@ public class XMLTreeViewer extends JFrame {
 	private static final long serialVersionUID = -738722273625654365L;
 
 	// The JTree to display the XML
-	protected JTree xmlTree;
+	protected static JTree xmlTree;
 
 	// The XML document to be output to the JTree
 	protected Document xmlDoc;
@@ -50,9 +50,10 @@ public class XMLTreeViewer extends JFrame {
 	}
 
 	protected void initialize() {
-		xmlTree = new JTree();
-		xmlTree.setName("XML Tree");
-
+		if (xmlTree==null){
+			xmlTree = new JTree();
+			xmlTree.setName("XML Tree");
+		}
 		processElement(xmlDocRootElement, tn);
 
 		((DefaultTreeModel) xmlTree.getModel()).setRoot(tn);
