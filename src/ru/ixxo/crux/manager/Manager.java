@@ -55,17 +55,17 @@ public class Manager
         
         MyFrame mf = new MyFrame(man);
         JFrame splashFrame = new JFrame();
-        SplashWindow splash = new SplashWindow("splash.jpg",splashFrame,mf,5000);
-
+        SplashWindow splash = new SplashWindow("images/splash.jpg",splashFrame,mf,3000);
+        
         mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mf.setTitle("Ixxo File System Monitor");
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image icon= toolkit.getImage("icon.jpg");
-		mf.setIconImage(icon);
+        mf.setTitle("Ixxo File System Monitor");
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image icon= toolkit.getImage("images/icon.jpg");
+        mf.setIconImage(icon);
 		//StatusComponent status = new StatusComponent(mf);
         //mf.getContentPane().add(status.getBox(), "South");
 
-		mf.setSize(800,600);
+		//mf.setSize(800,600);
 
         mf.centralize();
         
