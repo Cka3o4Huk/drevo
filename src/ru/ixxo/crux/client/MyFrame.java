@@ -116,13 +116,16 @@ public class MyFrame extends JFrame {
 
         toolBar = new JToolBar(JToolBar.VERTICAL);
         toolBar.setFloatable(false);
+        Dimension buttonDimension = new Dimension(33,33);
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = new JButton(new ImageIcon(Buttons.values()[i]
                     .getPathToImage()));
             buttons[i].setActionCommand(Buttons.values()[i].toString());
             buttons[i].setToolTipText(Buttons.values()[i].getToolTip());
             buttons[i].addActionListener(toolBarListener);
-            buttons[i].setMargin(new Insets(1,1,1,1));
+            buttons[i].setMargin(new Insets(3,0,3,0));
+            buttons[i].setMaximumSize(buttonDimension);
+            buttons[i].setPreferredSize(buttonDimension);
             toolBar.add(buttons[i]);
         }
         contentPane.add(toolBar, BorderLayout.EAST);
