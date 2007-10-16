@@ -60,7 +60,7 @@ public class Manager
         mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mf.setTitle("Ixxo File System Monitor");
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image icon= toolkit.getImage("images/icon.gif");
+        Image icon= toolkit.getImage("./images/icon.gif");
         mf.setIconImage(icon);
 		//StatusComponent status = new StatusComponent(mf);
         //mf.getContentPane().add(status.getBox(), "South");
