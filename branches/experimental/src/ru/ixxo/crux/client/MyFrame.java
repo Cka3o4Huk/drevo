@@ -186,6 +186,12 @@ public class MyFrame extends JFrame {
         initOptionsMenu(menubar);
         menu = new JMenu("Help");
         mi = new JMenuItem("About");
+        mi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                // MyFrame.this.man.shutDown();
+                new AboutWindow();
+            }
+        });
         menu.add(mi);
         menubar.add(menu);
 
