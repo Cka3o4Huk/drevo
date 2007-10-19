@@ -42,8 +42,10 @@ public class Dispatcher
 	public int viewMode = UNDEF_VIEW;
 	
 	public Dispatcher(String dirname) {
-		if(resultTree==null)
+		if(resultTree==null){
 			resultTree = new Element("Root");
+			resultTree.setAttribute("new","1");
+		}
 		this.flag = false;
 		queue = new Queue();
 		queue.push(dirname);
@@ -99,6 +101,7 @@ public class Dispatcher
 				Element directory = new Element("Directory");
 
 				directory.setAttribute("fileName", URLEncoder.encode(dirname));
+				directory.setAttribute("new", "1");
 				resultTree.addContent(directory);
 
 				queue.push(dirname);
@@ -113,10 +116,9 @@ public class Dispatcher
 					/**
 					 * Return current tree
 					 */
-
 					// JTree result = new JTree(tree);
 					XMLTreeViewer viewer;
-
+				//	Logger.info(new XMLOutputter().outputString(resultTree));
 					if (((viewMode == UNDEF_VIEW) && (Logger.debug)) 
 							|| (viewMode == XML_VIEW))
 					{
@@ -131,7 +133,7 @@ public class Dispatcher
 						
 					collParams.add(viewer.getJTree());
 				}
-
+				//Logger.info(new XMLOutputter().outputString(resultTree));
 				return completed;
 			}else{
 				return completed;
@@ -205,6 +207,7 @@ public class Dispatcher
 		Iterator it = entities.iterator();
 		while (it.hasNext()) {
 			Element entity = (Element) it.next();
+			entity.setAttribute("new","1");
 			String sourceFileName = entity.getAttributeValue("fileName");
 			
 			Logger.log("Processing Source Directory = " + sourceFileName);
@@ -236,6 +239,7 @@ public class Dispatcher
 					Element directory = (Element) directoryIt.next();
 					String fileName = URLDecoder.decode(directory.getAttributeValue("fileName"));
 					queue.push(fileName);
+					directory.setAttribute("new","1");
 					directory.detach();
 				}
 
@@ -249,6 +253,7 @@ public class Dispatcher
 				Iterator fileIt = files.iterator();
 				while (fileIt.hasNext()) {
 					Element file = (Element) fileIt.next();
+					file.setAttribute("new","1");
 					file.detach();
 				}
 
