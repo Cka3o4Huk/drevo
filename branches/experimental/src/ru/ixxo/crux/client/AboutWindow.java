@@ -15,7 +15,6 @@ import java.awt.event.MouseEvent;
 public class AboutWindow extends JFrame{
 	public AboutWindow(){
 		super();
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JTextArea ml=new JTextArea();
 		this.setTitle("About program");
 		ml.setText("    IXXO drevo\n" +
