@@ -16,9 +16,16 @@ public class AboutWindow extends JFrame{
 	public AboutWindow(){
 		super();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JLabel ml=new JLabel();
+		JTextArea ml=new JTextArea();
 		this.setTitle("About program");
-		ml.setText("This is about text");
+		ml.setText("    IXXO drevo\n" +
+				"This program is made by students of MIPT\n" +
+				"and a teacher from Kalashinkov's studing center\n" +
+				"http://ipccenter.ru");
+		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image icon= toolkit.getImage("./images/icon.gif");
+        this.setIconImage(icon);
 		this.add(ml);
 		this.resize(300, 300);
 		this.setResizable(false);
