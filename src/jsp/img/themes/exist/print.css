@@ -1,0 +1,102 @@
+	body
+	{
+	background-color: #ffffff;
+	direction: ltr;
+	}
+	.menu, a.menu, a.menu:visited, a.menu:link
+	{
+	display: none;
+	}
+	a
+	{
+	color: #003399;
+	font-size: 8px;
+	}
+	a.menu:hover
+	{
+	color: #0066cc;
+	}
+	.vm, .vms, .vml, a.vm:visited, a.vm:link, a.vms:visited, a.vms:link
+	{
+	display: none;
+	}
+	.vms, a.vms:visited, a.vms:link
+	{
+	display: none;
+	}
+	.vml
+	{
+	display: none;
+	}
+	a.vm:hover, a.vms:hover
+	{
+	display: none;
+	}
+	.gr
+	{
+	color: #333333;
+	}
+	.sm, .smaller
+	{
+	font-size: 7px;
+	}
+	h1, h2, h3
+	{
+	font-family: Arial, Tahoma, Verdana, sans-serif;
+	font-size: 12px;
+	color: #003399;
+	}
+	h2, h3
+	{
+	font-size: 12px;
+	}
+	h3
+	{
+	font-size: 12px;
+	color: #444444;
+	}
+	h4, h5
+	{
+	font-family: Arial, Tahoma, Verdana, sans-serif;
+	font-size: 8px;
+	color: #003399;
+	margin-top: 25px; 
+	margin-bottom: -15px;
+	}
+	P, LI, UL { 
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 8px;
+	font-weight: normal;
+	line-height: 14px;
+	padding-right: 10px;
+	}
+
+	LI, UL {
+  	list-style-image : url(img/blt_06.gif);
+	}
+
+	TH, TD  {/* ns 4 */
+  	font-family: Verdana, Arial, sans-serif;
+  	font-size: 8px;
+	}
+	
+	td.vm
+	{
+	display: none;
+	}
+
+	.in {font-size: 8px; font-family: Verdana, Arial, Helvetica, sans-serif; background-color:#ffffff; border: 1px solid #000099;}
+	.req {font-size: 8px; font-family: Verdana, Arial, Helvetica, sans-serif; background-color:#FFFDD6; border: 1px solid #000099;}
+
+.vmb, a.vmb:visited, a.vmb:link {
+display: none;
+}
+ img {
+ display: none;
+ } 
+.pr {
+	display: inline;
+}
+.none {
+	display: none;
+}

@@ -1,0 +1,14 @@
+"Ice Project created for development and research base
+for building large information systems or simple home pages.
+The main aim is creating base used object-oriented model
+for maximize performance of development. All for enjoyment! )
+
+System will be contain database and application servers. Model of
+database is object-oriented, i.e. it allow create objects of different
+types with different parameters. All content of future system will be
+save in DB. Application server (created with Java Technology =) ) will
+be translate objects to understandable for user dates and GUI.
+
+Main problem is performance of system. All operations such as
+translation objects and working with DB must be realized by using
+cache tables and other mechanisms."
