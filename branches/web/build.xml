@@ -1,0 +1,62 @@
+<project default="Deploy">
+	
+	<property name="TomcatServer5.5" 	value="C:\Bin\Web and Data Servers\Tomcat\Tomcat 5.5\webapps"/>
+	<property name="WarFile" 			value="Ice.war"/>
+	<property name="TomcatLibs" 		value="C:\Bin\Web and Data Servers\Tomcat\Tomcat 5.5\common\lib"/>
+	<property name="JDom" 				value="C:\Os\2005\Java Web Development\Examples\jdom.jar"/>
+	<property name="HSQLDBLib" 			value="C:\Bin\Web and Data Servers\HyperSonic 1.7.3\lib\hsqldb.jar"/>
+	
+	<target name = "prepare">
+		<mkdir dir="bin"/>
+		<mkdir dir="war"/>
+		<mkdir dir="war/WEB-INF"/>
+		<mkdir dir="war/WEB-INF/META-INF"/>		
+		<mkdir dir="war/WEB-INF/classes"/>	
+		<mkdir dir="war/WEB-INF/lib"/>
+		<mkdir dir="war/config"/>
+		<mkdir dir="war/site"/>		
+	</target>
+	<target name = "compile">
+		<javac destdir="bin" srcdir="src" classpath="${TomcatLibs}\servlet-api.jar;${JDom}">
+			<exclude name="web.xml"/>
+		</javac>
+	</target>
+	<target name = "config">		
+		<copy todir = "war/config">
+			<fileset dir="config"/>
+		</copy>
+	</target>
+	<target name = "copy">
+		<copy todir="war/site">
+			<fileset dir="site"/>
+		</copy>
+		<copy todir="war/META-INF">
+			<fileset dir="WEB-INF/META-INF"/>
+		</copy>
+		<copy todir="war/WEB-INF/lib">
+			<fileset file="${HSQLDBLib}"/>
+			<fileset file="${JDom}"/>
+		</copy>
+		<copy todir="war/WEB-INF/classes">
+			<fileset dir="bin"/>
+		</copy>
+	</target>	
+		
+	<target name="war" depends="prepare,compile,config,copy">		
+		<war destfile="${WarFile}" basedir="war" webxml="WEB-INF/web.xml"></war>
+	</target>
+	
+    <!-- ================================= 
+          target: Deploy              
+         ================================= -->
+    <target name="Deploy" depends="clean,war" description="--> Deployment servlets to Tomcat">
+        <delete file="${TomcatServer5.5}/${WarFile}"></delete>
+    	<copy file="${WarFile}" todir="${TomcatServer5.5}"/>
+    </target>	
+	
+	<target name="clean">
+		<delete dir="war"/>
+		<delete dir="bin"/>
+		<delete file="${WarFile}"/>
+	</target>
+</project>

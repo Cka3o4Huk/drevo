@@ -1,0 +1,125 @@
+td{
+	font-weight: bold;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 11px;
+}
+
+tr{
+	height: 16;
+}
+
+table.root{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	width: 100%;
+	background: #B1C6D7; 
+	border: 0px;
+	padding: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+
+table.menu{
+	border-bottom-color: #99CCFF;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #6699CC;
+	border-color: #99CCFF;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	letter-spacing: 0px;
+	word-spacing: 0px;
+}
+
+td.leftmenu{
+	border-top-color: #99CCFF;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-left-color: #99CCFF;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #99CCFF;
+	border-right-style: solid;
+	border-right-width: 1px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;	
+	background-color: #6699CC;
+}
+
+td.menu{
+	border-top-color: #99CCFF;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-left-color: #99CCFF;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: #99CCFF;
+	border-right-style: solid;
+	border-right-width: 1px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	height: 16px;
+}
+
+td.root{
+	border: 0px dashed Black;
+}
+
+a{
+	color: #003399;
+	text-decoration : none;
+}
+a:visited {
+    color: #660099;
+}
+
+a.menu, a.menu:visited{
+	color: #ffffff;
+	text-decoration : none;
+}
+
+.menu{
+	color: #ffffff;
+}
+#dropmenu{
+	visibility: hidden;
+	position: absolute;
+	top:0;
+	left:0;
+	Z-INDEX: 100;
+	WIDTH: 250px;
+  	HEIGHT: 400px;
+}
+
+#toolbar{
+	visibility: visible;
+	position: absolute;
+	top:0;
+	left:0;
+	Z-INDEX: 50;
+}
+
+table.menuBar{
+	border: 0px;
+	vertical-align: top;
+	border-bottom: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-top-width: 0px;
+	border-collapse: collapse;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+td.menuBar{
+	padding: 0px;
+	background: #003366;
+	vertical-align: top;
+}

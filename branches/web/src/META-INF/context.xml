@@ -1,0 +1,7 @@
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Mike (NetCracker) -->
+<Context path="/Ice" docBase="Ice">
+	<Resource name="jdbc/postgres" auth="Container" 
+		  type="javax.sql.DataSource" maxActive="10" maxIdle="20" minIdle="3" maxWait="-1" 
+		  url="jdbc:postgresql://192.168.0.1/dev_cat" driverClassName="org.postgresql.Driver" 
+                  username="postgres" password="morggrom"/>
+</Context>
