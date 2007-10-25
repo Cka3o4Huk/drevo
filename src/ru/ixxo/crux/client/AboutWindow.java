@@ -21,7 +21,7 @@ public class AboutWindow extends JFrame{
 				"This program is made by students of MIPT\n" +
 				"and a teacher from Kalashinkov's studing center\n" +
 				"http://ipccenter.ru");
-		
+		ml.setEditable(false);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image icon= toolkit.getImage("./images/icon.gif");
         this.setIconImage(icon);
