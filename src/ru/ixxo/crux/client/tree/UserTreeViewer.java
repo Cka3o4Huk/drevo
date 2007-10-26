@@ -5,6 +5,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 import java.net.URLEncoder;
 import java.net.URLDecoder;
+import java.io.File;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -60,7 +61,7 @@ public class UserTreeViewer extends XMLTreeViewer
 		} else {
 			String fileName = URLDecoder.decode(encodedName);
 
-			int index = fileName.lastIndexOf("/");
+			int index = fileName.lastIndexOf(File.separator);
 
 			if (index > -1) {
 				fileName = fileName.substring(index + 1);
