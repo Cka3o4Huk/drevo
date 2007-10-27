@@ -44,7 +44,7 @@ public class Dispatcher
 	public Dispatcher(String dirname) {
 		if(resultTree==null){
 			resultTree = new Element("Root");
-			resultTree.setAttribute("new","1");
+			resultTree.setAttribute("id","new");
 		}
 		this.flag = false;
 		queue = new Queue();
@@ -101,7 +101,7 @@ public class Dispatcher
 				Element directory = new Element("Directory");
 
 				directory.setAttribute("fileName", URLEncoder.encode(dirname));
-				directory.setAttribute("new", "1");
+				directory.setAttribute("id", "new");
 				resultTree.addContent(directory);
 
 				queue.push(dirname);
