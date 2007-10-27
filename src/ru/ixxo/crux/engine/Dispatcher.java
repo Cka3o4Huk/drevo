@@ -144,17 +144,19 @@ public class Dispatcher
 
 	public int doCalcSize(Element tree){
 		int size=0;
-	try{
-		if (tree.getAttributeValue("size").equalsIgnoreCase("null")) size=0;
-		size=Integer.parseInt(tree.getAttributeValue("size"));
-	}catch(Exception e){}
-		Object obj;
-		List l=tree.getChildren();
-		Iterator it = l.iterator();
-		while(it.hasNext()){
-			obj=it.next();
-			if(obj instanceof Element)
-				size+=doCalcSize((Element)obj);
+		try{
+			if (tree.getAttributeValue("size").equalsIgnoreCase("null")) size=0;
+			size=Integer.parseInt(tree.getAttributeValue("size"));
+		}catch(Exception e){}
+		if (size==0){
+			Object obj;
+			List l=tree.getChildren();
+			Iterator it = l.iterator();
+			while(it.hasNext()){
+				obj=it.next();
+				if(obj instanceof Element)
+					size+=doCalcSize((Element)obj);
+			}
 		}
 		tree.setAttribute("size",new Integer(size).toString());
 		return size;
@@ -226,7 +228,7 @@ public class Dispatcher
 		Iterator it = entities.iterator();
 		while (it.hasNext()) {
 			Element entity = (Element) it.next();
-			entity.setAttribute("new","1");
+			entity.setAttribute("id","new");
 			String sourceFileName = entity.getAttributeValue("fileName");
 			
 			Logger.log("Processing Source Directory = " + sourceFileName);
@@ -258,7 +260,7 @@ public class Dispatcher
 					Element directory = (Element) directoryIt.next();
 					String fileName = URLDecoder.decode(directory.getAttributeValue("fileName"));
 					queue.push(fileName);
-					directory.setAttribute("new","1");
+					directory.setAttribute("id","new");
 					directory.detach();
 				}
 
@@ -272,7 +274,7 @@ public class Dispatcher
 				Iterator fileIt = files.iterator();
 				while (fileIt.hasNext()) {
 					Element file = (Element) fileIt.next();
-					file.setAttribute("new","1");
+					file.setAttribute("id","new");
 					file.detach();
 				}
 
