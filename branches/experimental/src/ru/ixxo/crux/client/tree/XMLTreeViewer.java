@@ -1,6 +1,10 @@
 package ru.ixxo.crux.client.tree;
 
 import java.util.Iterator;
+import java.util.HashMap;
+import java.util.List;
+import org.jdom.output.XMLOutputter;
+import ru.ixxo.crux.common.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JTree;
@@ -8,10 +12,12 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import org.jdom.xpath.XPath;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 
 public class XMLTreeViewer extends JFrame {
 
@@ -21,22 +27,23 @@ public class XMLTreeViewer extends JFrame {
 	private static final long serialVersionUID = -738722273625654365L;
 
 	// The JTree to display the XML
-	protected static JTree xmlTree=null;
+	protected static JTree xmlTree = null;
+
+	private HashMap hm = new HashMap();
 
 	// The XML document to be output to the JTree
 	protected Document xmlDoc;
 
 	protected Element xmlDocRootElement;
 
-	DefaultMutableTreeNode tn;
+	static DefaultMutableTreeNode tn;
 
 	public XMLTreeViewer(Document doc) {
 		super();
 		this.xmlDoc = doc;
 		xmlDocRootElement = xmlDoc.getRootElement();
 
-		//setSize(600, 450);
-		tn = new DefaultMutableTreeNode("XML");
+		// setSize(600, 450);
 		initialize();
 	}
 
@@ -44,17 +51,47 @@ public class XMLTreeViewer extends JFrame {
 		super();
 		this.xmlDocRootElement = root;
 
-		//setSize(600, 450);
-		tn = new DefaultMutableTreeNode("XML");
+		// setSize(600, 450);
 		initialize();
 	}
 
 	protected void initialize() {
-		if (xmlTree==null){
+		if (xmlTree == null) {
 			xmlTree = new JTree();
 			xmlTree.setName("XML Tree");
+			tn = new DefaultMutableTreeNode("XML");
 		}
-		processElement(xmlDocRootElement, tn);
+		hm.put(new Integer(tn.hashCode()).toString(), tn);
+		xmlDocRootElement.setAttribute("id", new Integer(tn.hashCode())
+				.toString());
+		try {
+			XPath xp = XPath.newInstance(".//*[@id='new']");
+			List ls = xp.selectNodes(xmlDocRootElement);
+			Iterator it = ls.iterator();
+			while (it.hasNext()) {
+				Object obj = it.next();
+				Element el;
+				DefaultMutableTreeNode cn;
+				if (obj instanceof Element) {
+					el = (Element) obj;
+					cn = generateNodeByElement(el);
+					obj = el.getParent();
+					if (obj instanceof Element) {
+						obj = hm.get(((Element) obj).getAttributeValue("id"));
+						hm.put(new Integer(cn.hashCode()).toString(), cn);
+						el.setAttribute("id", new Integer(cn.hashCode())
+								.toString());
+						if (obj instanceof DefaultMutableTreeNode) {
+							((DefaultMutableTreeNode) obj).add(cn);
+						}else if (obj==null) tn.add(cn);
+					}
+				};
+			}
+		} catch (JDOMException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			Logger.info("\n\n\n\nException\n\n\n\n");
+		}
 
 		((DefaultTreeModel) xmlTree.getModel()).setRoot(tn);
 
@@ -108,35 +145,5 @@ public class XMLTreeViewer extends JFrame {
 		currentNode.add(new DefaultMutableTreeNode(attribute.getValue()));
 
 		return currentNode;
-	}
-
-	private void processElement(Element el, DefaultMutableTreeNode dmtn) {
-
-		DefaultMutableTreeNode currentNode = generateNodeByElement(el);
-		
-		if (currentNode != null) {
-			processAttributes(el, currentNode);
-			dmtn.add(currentNode);			
-		}else{
-			currentNode = dmtn;
-		}
-
-		Iterator children = el.getChildren().iterator();
-		
-		while (children.hasNext()) {
-			processElement((Element) children.next(), currentNode);
-		}
-
-	}
-
-	protected void processAttributes(Element el, DefaultMutableTreeNode dmtn) {
-		Iterator atts = el.getAttributes().iterator();
-
-		while (atts.hasNext()) {
-			Attribute att = (Attribute) atts.next();
-			DefaultMutableTreeNode attNode = generateNodeByAttribute(att);
-			if (attNode != null)
-				dmtn.add(attNode);
-		}
 	}
 }
