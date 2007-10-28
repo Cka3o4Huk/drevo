@@ -132,7 +132,7 @@ public class Dispatcher
 							viewer = new UserTreeViewer(resultTree);
 					}
 						
-					collParams.add(viewer.getJTree());
+					collParams.add(viewer);
 				}
 				//Logger.info(new XMLOutputter().outputString(resultTree));
 				return completed;

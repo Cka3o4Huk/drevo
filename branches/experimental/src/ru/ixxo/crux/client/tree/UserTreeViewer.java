@@ -1,17 +1,23 @@
 package ru.ixxo.crux.client.tree;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-
-import java.net.URLEncoder;
-import java.net.URLDecoder;
-import java.io.File;
-
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
+import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
+import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeEditor;
+import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeRenderer;
+import ru.ixxo.crux.common.Logger;
 
-import ru.ixxo.crux.client.tree.enhance.*;
+import javax.swing.tree.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.net.URLDecoder;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class UserTreeViewer extends XMLTreeViewer 
 {
@@ -21,7 +27,7 @@ public class UserTreeViewer extends XMLTreeViewer
 	 */
 	private static final long serialVersionUID = 6169896871952578148L;
 
-	public UserTreeViewer(Document doc) {
+    public UserTreeViewer(Document doc) {
 		super(doc);
 	}
 
@@ -33,21 +39,54 @@ public class UserTreeViewer extends XMLTreeViewer
 
 	protected void initialize(){
 		super.initialize();
-		
-		renderer = new CheckBoxNodeRenderer();
-		xmlTree.setCellRenderer(renderer);
-		xmlTree.setCellEditor(new CheckBoxNodeEditor(xmlTree));
+        // add Listener to Print to Screen the xml tag selected
+		xmlTree.setCellRenderer(new CheckBoxNodeRenderer());
+        xmlTree.setCellEditor(new CheckBoxNodeEditor(xmlTree));
 		xmlTree.setEditable(true);
-		
-		DefaultTreeModel model = (DefaultTreeModel) xmlTree.getModel();
+        xmlTree.addMouseListener(new MyMouseAdapter());
+        xmlTree.setModel(new MenuListModel(tn));
+
+        TreeModel model = xmlTree.getModel();
 		
 		if(((DefaultMutableTreeNode)model.getRoot()).getChildCount() == 1){
 			tn = ((DefaultMutableTreeNode)model.getRoot()).getNextNode();
-			((DefaultTreeModel) xmlTree.getModel()).setRoot(tn); 
-		}
+			((DefaultTreeModel) xmlTree.getModel()).setRoot(tn);
+            
+        }
 	}
 
-	protected DefaultMutableTreeNode generateNodeByElement(Element element) {
+    class MyMouseAdapter extends MouseAdapter  {
+
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton()!=MouseEvent.BUTTON1) return;
+        TreePath path = xmlTree.getPathForLocation(e.getX(), e.getY());
+        //TreePath path = getClosestPathForLocation(e.getX(), e.getY());
+        if (path == null) {
+            return;
+        }
+        Object data = path.getLastPathComponent();
+        if (data instanceof TreeNode) {
+            TreeModel model = xmlTree.getModel();
+            Object userObject = ((DefaultMutableTreeNode) data).getUserObject();
+            CheckBoxNode selectable = (CheckBoxNode) userObject;
+            if (model instanceof MenuListModel) {
+                MenuListModel mod = (MenuListModel) model;
+//                Logger.info("add/remove" + selectable.getText());
+                mod.setSelected(selectable, !selectable.isSelected());
+//                Logger.info("size = " + mod.getSelected().size());
+//                for (Iterator it = mod.getSelected().iterator(); it.hasNext();) {
+//                    Object next = it.next();
+//                    Logger.info(" "+((JCheckBox)next).isSelected());
+//                    Logger.info(" "+((JCheckBox)next).getText());
+//                }
+
+            }
+            repaint();
+        }
+    }
+    }
+
+    protected DefaultMutableTreeNode generateNodeByElement(Element element) {
 
 		if (element == null)
 			return null;
@@ -72,7 +111,7 @@ public class UserTreeViewer extends XMLTreeViewer
 			nodeName = fileName + " [size = " + size + "]";
 		}
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode(nodeName);
-		node.setUserObject(new CheckBoxNode(nodeName, false));
+		node.setUserObject(new CheckBoxNode(nodeName, false, node));
 		return node;
 	}
 
