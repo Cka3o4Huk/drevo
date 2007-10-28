@@ -28,6 +28,9 @@ public class ExitAlert extends JFrame
                 ExitAlert.this.dispose();
             }
         });
+        this.setUndecorated(true);
+        this.getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
+        this.setAlwaysOnTop(true);
         this.setTitle("Confirm Exit");
         this.add(ml, BorderLayout.NORTH);
         JPanel panel = new JPanel();
