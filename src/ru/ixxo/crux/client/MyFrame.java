@@ -1,5 +1,8 @@
 package ru.ixxo.crux.client;
 
+import ru.ixxo.crux.client.tree.UserTreeViewer;
+import ru.ixxo.crux.client.tree.XMLTreeViewer;
+import ru.ixxo.crux.client.tree.MenuListModel;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.manager.Manager;
@@ -68,27 +71,17 @@ public class MyFrame extends JFrame {
 
     ActionListener toolBarListener = new ActionListener() {
         public void actionPerformed(final ActionEvent e) {
-            switch (Buttons.valueOf(e.getActionCommand())) {
-                case START:
-                case STOP:
-                case REFRESH:
-                case UNMARK:
-                case DELETE:
-                case CANCEL:
-                case COMPLETE:
-
-                default:
-
-            }
-
             Logger.info(e.getActionCommand());
-
+            processActions(e);
         }
     };
 
     BorderLayout layout;
 
     Container contentPane;
+
+    XMLTreeViewer treeViewer;
+    //TreeSet<Integer> selection = new TreeSet<Integer>();
 
     public MyFrame(Manager man) {
         this.man = man;
@@ -128,6 +121,7 @@ public class MyFrame extends JFrame {
             buttons[i].setPreferredSize(buttonDimension);
             toolBar.add(buttons[i]);
         }
+        buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
         contentPane.add(toolBar, BorderLayout.EAST);
 
         menubar = new JMenuBar();
@@ -138,41 +132,8 @@ public class MyFrame extends JFrame {
 
         menu = new JMenu("Menu");
         JMenuItem mi = new JMenuItem("Select Directory");
-        mi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                Logger.info("Selection of the directory");
-                String targetDirectory = null;
-
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                Logger.info("Show JFileChooser");
-                int returnVal = fileChooser.showOpenDialog(MyFrame.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    targetDirectory = fileChooser.getSelectedFile()
-                            .getAbsolutePath();
-                }
-                /*
-                     String text = JOptionPane.showInputDialog(null,
-                     "Select Directory:", "Select Directory",
-                     JOptionPane.QUESTION_MESSAGE);
-                     if (text == null) {
-                     // User clicked cancel
-                     }
-    
-                     else {
-                     */
-                if (targetDirectory != null) {
-                    Logger.info("Text entered: " + targetDirectory);
-                    MyFrame.this.sendDirName(targetDirectory);
-                    jsp.add(tree);
-                    progressBar.setString("Please wait. Process can occupy some minutes");
-                    progressBar.setStringPainted(true);
-                    progressBar.setVisible(true);
-                    MyFrame.this.pack();
-                    MyFrame.this.RefreshGUI();
-                }
-            }
-        });
+        mi.setActionCommand("START");
+        mi.addActionListener(toolBarListener);
         menu.add(mi);
         mi = new JMenuItem("Exit");
         mi.addActionListener(new ActionListener() {
@@ -259,31 +220,33 @@ public class MyFrame extends JFrame {
         }
     }
 
-    public void drawJTree(JTree jtree) {
+    public void drawJTree(XMLTreeViewer treeViewer) {
 
         //		Container contentPane = this.getContentPane();
         // contentPane.setLayout(new BorderLayout());
 
         if (tree == null) {
             Logger.info("Setting new tree");
-            tree = jtree;
-            jsp.setViewportView(jtree);
+            this.treeViewer = treeViewer;
+            tree = treeViewer.getJTree();
+            jsp.setViewportView(tree);
             progressBar.setVisible(false);
-            jtree.addMouseListener(new MouseAdapter() {
+            tree.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent me) {
                     doMouseClicked(me);
                 }
             });
-            jtree.setVisible(true);
-            TreePath path = new TreePath(jtree);
-            jtree.makeVisible(path);
+            tree.setVisible(true);
+            TreePath path = new TreePath(tree);
+            tree.makeVisible(path);
             pack();
         } else {
-            jsp.setViewportView(jtree);
-            jtree.setVisible(false);
-            jtree.setVisible(true);
+            jsp.setViewportView(tree);
+            tree.setVisible(false);
+            tree.setVisible(true);
             progressBar.setVisible(false);
         }
+
     }
 
     public void RefreshGUI() {
@@ -315,6 +278,12 @@ public class MyFrame extends JFrame {
         TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
         if (tp != null) {
             jtf.setText(tp.toString());
+            if (treeViewer instanceof UserTreeViewer)
+                if (((MenuListModel)tree.getModel()).isNothingChecked())
+                    buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
+                else
+                    buttons[Buttons.UNMARK.ordinal()].setEnabled(true);
+
         } else {
             jtf.setText("");
         }
@@ -339,12 +308,51 @@ public class MyFrame extends JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /*
-      * public static void main(String [] args) { MyFrame mf = new MyFrame();
-      * mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); mf.setTitle("Swing
-      * Interface"); //StatusComponent status = new StatusComponent(mf);
-      * //mf.getContentPane().add(status.getBox(), "South");
-      *
-      * mf.setSize(800,600); mf.setVisible(true); //mf.repaint(); }
-      */
+    public void processActions(ActionEvent e){
+        switch (Buttons.valueOf(e.getActionCommand())) {
+            case START:
+                Logger.info("Selection of the directory");
+                String targetDirectory = null;
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                Logger.info("Show JFileChooser");
+                int returnVal = fileChooser.showOpenDialog(this);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    targetDirectory = fileChooser.getSelectedFile()
+                            .getAbsolutePath();
+                }
+                if (targetDirectory == null) break;
+                Logger.info("Text entered: " + targetDirectory);
+                sendDirName(targetDirectory);
+                jsp.add(tree);
+                progressBar.setString("Please wait. Process can occupy some minutes");
+                progressBar.setStringPainted(true);
+                progressBar.setVisible(true);
+                pack();
+                RefreshGUI();
+                break;
+            case STOP:
+            case REFRESH:
+            case UNMARK:
+                ((MenuListModel)tree.getModel()).uncheckAll();
+                tree.repaint();
+                buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
+                RefreshGUI();
+                break;
+            case DELETE:
+                ((MenuListModel)tree.getModel()).mark();
+                tree.repaint();
+                RefreshGUI();
+                break;
+            case CANCEL:
+                ((MenuListModel)tree.getModel()).unmark();
+                tree.repaint();
+                RefreshGUI();
+                break;
+            case COMPLETE:
+        }
+
+    }
+
+
 }

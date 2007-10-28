@@ -79,8 +79,7 @@ public class XMLTreeViewer extends JFrame {
 					if (obj instanceof Element) {
 						obj = hm.get(((Element) obj).getAttributeValue("id"));
 						hm.put(new Integer(cn.hashCode()).toString(), cn);
-						el.setAttribute("id", new Integer(cn.hashCode())
-								.toString());
+						el.setAttribute("id", new Integer(cn.hashCode()).toString());
 						if (obj instanceof DefaultMutableTreeNode) {
 							((DefaultMutableTreeNode) obj).add(cn);
 						}else if (obj==null) tn.add(cn);
@@ -92,7 +91,7 @@ public class XMLTreeViewer extends JFrame {
 			e1.printStackTrace();
 			Logger.info("\n\n\n\nException\n\n\n\n");
 		}
-
+                             
 		((DefaultTreeModel) xmlTree.getModel()).setRoot(tn);
 
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -103,17 +102,7 @@ public class XMLTreeViewer extends JFrame {
 			}
 		});
 
-		// add Listener to Print to Screen the xml tag selected
-		xmlTree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent evt) {
-				// Get all nodes whose selection status has changed
-				// Print the last Path Component selected
-				System.out.println(evt.getPath().getLastPathComponent());
-
-				// print the full path from the selected tag
-				// System.out.println(evt.getPath().toString());
-			}
-		});
+		
 
 		/*
 		 * getContentPane().add(new JScrollPane(xmlTree), BorderLayout.CENTER);

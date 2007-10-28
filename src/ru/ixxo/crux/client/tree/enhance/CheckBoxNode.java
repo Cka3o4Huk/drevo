@@ -1,36 +1,61 @@
 package ru.ixxo.crux.client.tree.enhance;
 
+import javax.swing.*;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 public class CheckBoxNode {
-	String text;
+//    String text;
+//    boolean selected;
 
-	boolean selected;
+    public boolean isMarked()
+    {
+        return marked;
+    }
 
-	public CheckBoxNode(String text, boolean selected) {
-		this.text = text;
-		this.selected = selected;
-	}
+    public void setMarked(boolean marked)
+    {
+        this.marked = marked;
+    }
 
-	public boolean isSelected() {
-		return selected;
-	}
-	
-	public boolean isEditable() {
-		return true;
-	}
+    private boolean marked = false;
 
-	public void setSelected(boolean newValue) {
-		selected = newValue;
-	}
+    public JCheckBox getItem()
+    {
+        return item;
+    }
 
-	public String getText() {
-		return text;
-	}
+    private JCheckBox item = new JCheckBox();
 
-	public void setText(String newValue) {
-		text = newValue;
-	}
+    public DefaultMutableTreeNode owner  = null;
 
-	public String toString() {
-		return getClass().getName() + "[" + text + "/" + selected + "]";
-	}
+    public CheckBoxNode(String text, boolean selected, DefaultMutableTreeNode owner) {
+        item.setText(text);
+        item.setSelected(selected);
+        this.owner = owner;
+    }
+
+    public boolean isSelected() {
+        return item.isSelected();
+    }
+
+    public boolean isEditable() {
+        return true;
+    }
+
+    public void setSelected(boolean newValue) {
+        item.setSelected(newValue);
+    }
+
+    public String getText() {
+        return item.getText();
+    }
+
+    public void setText(String newValue) {
+        item.setText(newValue);
+    }
+
+    public String toString() {
+        return getClass().getName() + "[" + item.getText() + "/" + item.isSelected() + "]";
+    }
 }

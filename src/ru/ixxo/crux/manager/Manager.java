@@ -9,6 +9,7 @@ import javax.swing.JTree;
 
 import ru.ixxo.crux.client.MyFrame;
 import ru.ixxo.crux.client.SplashWindow;
+import ru.ixxo.crux.client.tree.XMLTreeViewer;
 import ru.ixxo.crux.common.Logger;
 
 import ru.ixxo.crux.engine.Dispatcher;
@@ -133,7 +134,7 @@ public class Manager
 					/**
 					 * Tree Request
 					 */
-						JTree tree = requestTree();
+						XMLTreeViewer tree = requestTree();
 
 					if (tree != null)
 						repaintTree(mf, tree);
@@ -143,7 +144,7 @@ public class Manager
 			}
 	        else if(enforceReloadTree)
 			{
-				JTree tree = requestTree();
+				XMLTreeViewer tree = requestTree();
 
 				if (tree != null)
 					repaintTree(mf, tree);
@@ -155,7 +156,7 @@ public class Manager
         }
     }
     
-    public JTree requestTree()
+    public XMLTreeViewer requestTree()
     {
         ArrayList sendParameters = new ArrayList();
         ArrayList params;
@@ -170,10 +171,10 @@ public class Manager
         Object obj = (receivedParameters!=null && receivedParameters.size() > 0) ? 
        		 receivedParameters.toArray()[0] : null;	
        		 
-        return (obj != null && obj instanceof JTree)? (JTree) obj: null;
+        return (obj != null && obj instanceof XMLTreeViewer)? (XMLTreeViewer) obj: null;
     }
     
-    protected void repaintTree(MyFrame mf, JTree tree){
+    protected void repaintTree(MyFrame mf, XMLTreeViewer tree){
 		mf.drawJTree(tree);
         if(!mf.isDisplayable()){
         	mf.setVisible(true);
