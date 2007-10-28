@@ -10,10 +10,7 @@ import ru.ixxo.crux.manager.Manager;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MyFrame extends JFrame {
     /**
@@ -139,7 +136,7 @@ public class MyFrame extends JFrame {
         mi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 // MyFrame.this.man.shutDown();
-                System.exit(0);
+                new ExitAlert();
             }
         });
         menu.add(mi);
@@ -155,6 +152,38 @@ public class MyFrame extends JFrame {
         });
         menu.add(mi);
         menubar.add(menu);
+        
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowListener(){
+            public void windowClosing(WindowEvent e)
+            {
+                new ExitAlert();
+            }
+
+            public void windowClosed(WindowEvent e)
+            {
+            }
+
+            public void windowIconified(WindowEvent e)
+            {
+            }
+
+            public void windowDeiconified(WindowEvent e)
+            {
+            }
+
+            public void windowActivated(WindowEvent e)
+            {
+            }
+
+            public void windowDeactivated(WindowEvent e)
+            {
+            }
+
+            public void windowOpened(WindowEvent e)
+            {
+            }
+        });
 
         RefreshGUI();
     }
