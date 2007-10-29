@@ -41,8 +41,8 @@ public class MyFrame extends JFrame {
     JToolBar toolBar;
 
     private static enum Buttons {
-        START("Start scanning"), REFRESH("Refresh tree"), UNMARK("Uncheck all"), DELETE(
-            "Mark for deleting"), CANCEL("Unmark all marked"), COMPLETE(
+        START("Start scanning"), REFRESH("Refresh tree"), UNCHECK("Uncheck all"), DELETE(
+            "Mark for deletion"), CANCEL("Unmark all marked"), COMPLETE(
             "Delete marked"), STOP("Stop scanning");
 
         private final String pathToImage;
@@ -78,7 +78,6 @@ public class MyFrame extends JFrame {
     Container contentPane;
 
     XMLTreeViewer treeViewer;
-    //TreeSet<Integer> selection = new TreeSet<Integer>();
 
     public MyFrame(Manager man) {
         this.man = man;
@@ -118,7 +117,8 @@ public class MyFrame extends JFrame {
             buttons[i].setPreferredSize(buttonDimension);
             toolBar.add(buttons[i]);
         }
-        buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
+        buttons[Buttons.UNCHECK.ordinal()].setEnabled(false);
+        buttons[Buttons.CANCEL.ordinal()].setEnabled(false);
         contentPane.add(toolBar, BorderLayout.EAST);
 
         menubar = new JMenuBar();
@@ -251,9 +251,6 @@ public class MyFrame extends JFrame {
 
     public void drawJTree(XMLTreeViewer treeViewer) {
 
-        //		Container contentPane = this.getContentPane();
-        // contentPane.setLayout(new BorderLayout());
-
         if (tree == null) {
             Logger.info("Setting new tree");
             this.treeViewer = treeViewer;
@@ -309,9 +306,9 @@ public class MyFrame extends JFrame {
             jtf.setText(tp.toString());
             if (treeViewer instanceof UserTreeViewer)
                 if (((MenuListModel)tree.getModel()).isNothingChecked())
-                    buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
+                    buttons[Buttons.UNCHECK.ordinal()].setEnabled(false);
                 else
-                    buttons[Buttons.UNMARK.ordinal()].setEnabled(true);
+                    buttons[Buttons.UNCHECK.ordinal()].setEnabled(true);
 
         } else {
             jtf.setText("");
@@ -361,24 +358,34 @@ public class MyFrame extends JFrame {
                 RefreshGUI();
                 break;
             case STOP:
+                break;
             case REFRESH:
-            case UNMARK:
+                break;
+            case UNCHECK:
                 ((MenuListModel)tree.getModel()).uncheckAll();
                 tree.repaint();
-                buttons[Buttons.UNMARK.ordinal()].setEnabled(false);
+                buttons[Buttons.UNCHECK.ordinal()].setEnabled(false);
                 RefreshGUI();
                 break;
             case DELETE:
                 ((MenuListModel)tree.getModel()).mark();
                 tree.repaint();
+                if (treeViewer instanceof UserTreeViewer)
+                    if (((MenuListModel)tree.getModel()).isNothingMarked())
+                        buttons[Buttons.CANCEL.ordinal()].setEnabled(false);
+                    else
+                        buttons[Buttons.CANCEL.ordinal()].setEnabled(true);
                 RefreshGUI();
                 break;
             case CANCEL:
                 ((MenuListModel)tree.getModel()).unmark();
                 tree.repaint();
+                buttons[Buttons.CANCEL.ordinal()].setEnabled(false);
                 RefreshGUI();
                 break;
             case COMPLETE:
+
+                break;
         }
 
     }
