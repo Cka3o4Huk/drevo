@@ -1,12 +1,14 @@
 package ru.ixxo.crux.client.tree;
 
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
-import ru.ixxo.crux.common.Logger;
 
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,10 +21,13 @@ public class MenuListModel extends DefaultTreeModel{
 
     HashMap<String,CheckBoxNode> selectedItems = new HashMap<String,CheckBoxNode>();
 
-    HashMap<String,CheckBoxNode> markedItems = new HashMap<String,CheckBoxNode>();
+    public HashMap<String, DefaultMutableTreeNode> getMarkedItems() {
+        return markedItems;
+    }
 
-    public MenuListModel(TreeNode root)
-    {
+    HashMap<String, DefaultMutableTreeNode> markedItems = new HashMap<String,DefaultMutableTreeNode>();
+
+    public MenuListModel(TreeNode root) {
         super(root);
     }
 
@@ -36,21 +41,19 @@ public class MenuListModel extends DefaultTreeModel{
             selectedItems.remove(str);
         }
     }
+
     public List getSelected() {
-        //к примеру, элементы хранятся в списке selectedItems;
         List res = new ArrayList();
         for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
             Object data = it.next();
             if (data instanceof CheckBoxNode && ((CheckBoxNode)data).isSelected()) {
                 res.add(((CheckBoxNode)data).getItem());
-                //добавляем к результату нужный объект, а не обертку!!!
             }
         }
         return res;
     }
 
-    public boolean isNothingChecked()
-    {
+    public boolean isNothingChecked() {
         for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
             if (((CheckBoxNode)it.next()).isSelected()) return false;
         }
@@ -63,28 +66,22 @@ public class MenuListModel extends DefaultTreeModel{
             if (ch.owner!=null)
                 ch.owner.setUserObject(new CheckBoxNode(ch.getText().
                         substring(0, ch.getText().lastIndexOf(']')+1), false, ch.owner));
-            else Logger.info("bug");
-            ch.getItem().setSelected(false);
         }
-        mark();
         selectedItems.clear();
     }
 
     public void mark(){
         for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
             CheckBoxNode ch = (CheckBoxNode)it.next();
-            markedItems.put(ch.getText().substring(0, ch.getText().lastIndexOf('[')-1), ch);
-        }
-
-        for (Iterator it = markedItems.values().iterator(); it.hasNext();) {
-            ((CheckBoxNode)it.next()).setMarked(true);
+            markedItems.put(ch.getText().substring(0, ch.getText().lastIndexOf('[')-1), ch.owner);
         }
     }
 
     public void unmark(){
-        for (Iterator it = markedItems.values().iterator(); it.hasNext();) {
-            ((CheckBoxNode)it.next()).setMarked(false);
-        }
         markedItems.clear();
+    }
+
+    public boolean isNothingMarked() {
+        return (markedItems.size()==0);
     }
 }

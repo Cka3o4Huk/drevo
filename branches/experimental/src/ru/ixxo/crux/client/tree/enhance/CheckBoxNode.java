@@ -1,24 +1,9 @@
 package ru.ixxo.crux.client.tree.enhance;
 
 import javax.swing.*;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class CheckBoxNode {
-//    String text;
-//    boolean selected;
-
-    public boolean isMarked()
-    {
-        return marked;
-    }
-
-    public void setMarked(boolean marked)
-    {
-        this.marked = marked;
-    }
-
-    private boolean marked = false;
 
     public JCheckBox getItem()
     {

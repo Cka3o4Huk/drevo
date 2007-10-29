@@ -6,18 +6,12 @@ import org.jdom.Element;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeEditor;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeRenderer;
-import ru.ixxo.crux.common.Logger;
 
 import javax.swing.tree.*;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URLDecoder;
-import java.util.HashSet;
-import java.util.Iterator;
 
 public class UserTreeViewer extends XMLTreeViewer 
 {
@@ -71,15 +65,7 @@ public class UserTreeViewer extends XMLTreeViewer
             CheckBoxNode selectable = (CheckBoxNode) userObject;
             if (model instanceof MenuListModel) {
                 MenuListModel mod = (MenuListModel) model;
-//                Logger.info("add/remove" + selectable.getText());
                 mod.setSelected(selectable, !selectable.isSelected());
-//                Logger.info("size = " + mod.getSelected().size());
-//                for (Iterator it = mod.getSelected().iterator(); it.hasNext();) {
-//                    Object next = it.next();
-//                    Logger.info(" "+((JCheckBox)next).isSelected());
-//                    Logger.info(" "+((JCheckBox)next).getText());
-//                }
-
             }
             repaint();
         }

@@ -1,12 +1,11 @@
 package ru.ixxo.crux.client.tree.enhance;
 
-import ru.ixxo.crux.common.Logger;
+import ru.ixxo.crux.client.tree.MenuListModel;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class CheckBoxNodeRenderer implements TreeCellRenderer {
 
@@ -69,7 +68,10 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
             Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
             if (userObject instanceof CheckBoxNode) {
 				CheckBoxNode node = (CheckBoxNode) userObject;
-                if (node.isMarked()) leafRenderer.setForeground(marked);
+                if (tree.getModel() instanceof MenuListModel)
+                    if (((MenuListModel)tree.getModel()).getMarkedItems().containsValue(value))
+                        leafRenderer.setForeground(marked);
+                
                 leafRenderer.setText(node.getText());
 				leafRenderer.setSelected(node.isSelected());
 			}

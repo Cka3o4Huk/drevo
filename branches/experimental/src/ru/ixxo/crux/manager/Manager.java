@@ -202,4 +202,8 @@ public class Manager
         System.exit(0);
     }
 
+    public void processDeletion(){
+
+    }
+
 }

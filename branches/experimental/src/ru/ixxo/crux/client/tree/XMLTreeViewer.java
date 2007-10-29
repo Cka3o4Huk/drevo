@@ -102,13 +102,6 @@ public class XMLTreeViewer extends JFrame {
 			}
 		});
 
-		
-
-		/*
-		 * getContentPane().add(new JScrollPane(xmlTree), BorderLayout.CENTER);
-		 * 
-		 * setVisible(true);
-		 */
 	}
 
 	public JTree getJTree() {
@@ -133,6 +126,6 @@ public class XMLTreeViewer extends JFrame {
 
 		currentNode.add(new DefaultMutableTreeNode(attribute.getValue()));
 
-		return currentNode;
+        return currentNode;
 	}
 }
