@@ -2,10 +2,9 @@ package ru.ixxo.crux.client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.Set;
+import java.util.HashSet;
 
 public class ExitAlert extends JFrame
 {
@@ -29,7 +28,7 @@ public class ExitAlert extends JFrame
             }
         });
         this.setUndecorated(true);
-        this.getRootPane().setWindowDecorationStyle(JRootPane.QUESTION_DIALOG);
+        this.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
         this.setAlwaysOnTop(true);
         this.setTitle("Confirm Exit");
         this.add(ml, BorderLayout.NORTH);
@@ -44,6 +43,16 @@ public class ExitAlert extends JFrame
         panel.setVisible(true);
         yes.setVisible(true);
         no.setVisible(true);
+
+        Set s = new HashSet();
+        s.add (AWTKeyStroke.getAWTKeyStroke (KeyEvent.VK_RIGHT, 0));
+        s.add (AWTKeyStroke.getAWTKeyStroke (KeyEvent.VK_TAB, 0));
+        yes.setFocusTraversalKeys (KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, s);
+        s.clear();
+        s.add (AWTKeyStroke.getAWTKeyStroke (KeyEvent.VK_LEFT, 0));
+        s.add (AWTKeyStroke.getAWTKeyStroke (KeyEvent.VK_TAB, 0));
+        no.setFocusTraversalKeys (KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, s);
+
         ml.setVisible(true);
         this.setVisible(true);
         this.getOwner().setFocusable(false);

@@ -1,19 +1,15 @@
 package ru.ixxo.crux.manager;
 
-import java.awt.Image;
-import java.util.ArrayList;
-import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JTree;
-
 import ru.ixxo.crux.client.MyFrame;
 import ru.ixxo.crux.client.SplashWindow;
 import ru.ixxo.crux.client.tree.XMLTreeViewer;
 import ru.ixxo.crux.common.Logger;
-
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.engine.core.EngineManager;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * 
@@ -200,10 +196,6 @@ public class Manager
         em.interruptThreads();
         em.interrupt();
         System.exit(0);
-    }
-
-    public void processDeletion(){
-
     }
 
 }
