@@ -1,41 +1,36 @@
 package ru.ixxo.crux.client.tree.enhance;
 
-import ru.ixxo.crux.client.tree.MenuListModel;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JTree;
+import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
-import java.awt.*;
-import java.awt.event.*;
 
-import javax.swing.*;
-
-import ru.ixxo.crux.common.Logger;
+import ru.ixxo.crux.client.tree.MenuListModel;
 
 public class CheckBoxNodeRenderer implements TreeCellRenderer {
 	private JCheckBox leafRenderer = new ComplexNode();
 
-    public DefaultMutableTreeNode getOwner()
-    {
-        return owner;
-    }
+	public DefaultMutableTreeNode getOwner() {
+		return owner;
+	}
 
-    private DefaultMutableTreeNode owner;
+	private DefaultMutableTreeNode owner;
 
-    Color selectionBorderColor, selectionForeground, selectionBackground,
-            textForeground, textBackground, marked;
+	Color selectionBorderColor, selectionForeground, selectionBackground,
+			textForeground, textBackground, marked;
 
 	protected JCheckBox getLeafRenderer() {
-        return leafRenderer;
+		return leafRenderer;
 	}
 
 	public CheckBoxNodeRenderer() {
-        leafRenderer.setOpaque(false);
-        Font fontValue;
+		leafRenderer.setOpaque(false);
+		Font fontValue;
 		fontValue = UIManager.getFont("Tree.font");
 		if (fontValue != null) {
 			leafRenderer.setFont(fontValue);
@@ -45,18 +40,18 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 		leafRenderer.setFocusPainted((booleanValue != null)
 				&& (booleanValue.booleanValue()));
 
-        selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
+		selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
 		selectionForeground = UIManager.getColor("Tree.selectionForeground");
 		selectionBackground = UIManager.getColor("Tree.selectionBackground");
 		textForeground = UIManager.getColor("Tree.textForeground");
 		textBackground = UIManager.getColor("Tree.textBackground");
-        marked = new Color(255, 0, 0);
-    }
+		marked = new Color(255, 0, 0);
+	}
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value,
 			boolean selected, boolean expanded, boolean leaf, int row,
 			boolean hasFocus) {
-        String stringValue = tree.convertValueToText(value, selected, expanded,
+		String stringValue = tree.convertValueToText(value, selected, expanded,
 				leaf, row, false);
 		leafRenderer.setText(stringValue);
 		leafRenderer.setSelected(false);
@@ -71,35 +66,23 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 			leafRenderer.setBackground(textBackground);
 		}
 
-        if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
-            Object userObject = ((DefaultMutableTreeNode) value)
-                    .getUserObject();
-            if (userObject instanceof CheckBoxNode) {
-                CheckBoxNode node = (CheckBoxNode) userObject;
-                leafRenderer.setText(node.getText());
-                leafRenderer.setSelected(node.isSelected());
-                if (tree.getModel() instanceof MenuListModel) {
-                    if (((MenuListModel) tree.getModel()).getSelectedItems().containsValue(owner))
-                        leafRenderer.setSelected(true);
-                    if (((MenuListModel) tree.getModel()).getMarkedItems().containsValue(owner))
-                        leafRenderer.setForeground(marked);
-                }
-            }
-
-            if (userObject instanceof CheckBoxNode) {
-                CheckBoxNode node = (CheckBoxNode) userObject;
-                leafRenderer.setText(node.getText());
-                leafRenderer.setSelected(node.isSelected());
-                if (tree.getModel() instanceof MenuListModel){
-                    if (((MenuListModel)tree.getModel()).getSelectedItems().containsValue(owner))
-                        leafRenderer.setSelected(true);
-                    if (((MenuListModel)tree.getModel()).getMarkedItems().containsValue(owner))
-                        leafRenderer.setForeground(marked);
-                }
-
-
-            }
-        }
-    return leafRenderer;
+		if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
+			Object userObject = ((DefaultMutableTreeNode) value)
+					.getUserObject();
+			if (userObject instanceof CheckBoxNode) {
+				CheckBoxNode node = (CheckBoxNode) userObject;
+				leafRenderer.setText(node.getText());
+				leafRenderer.setSelected(node.isSelected());
+				if (tree.getModel() instanceof MenuListModel) {
+					if (((MenuListModel) tree.getModel()).getSelectedItems()
+							.containsValue(owner))
+						leafRenderer.setSelected(true);
+					if (((MenuListModel) tree.getModel()).getMarkedItems()
+							.containsValue(owner))
+						leafRenderer.setForeground(marked);
+				}
+			}
+		}
+		return leafRenderer;
 	}
 }
