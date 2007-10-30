@@ -53,6 +53,26 @@ public class ExitAlert extends JFrame
         s.add (AWTKeyStroke.getAWTKeyStroke (KeyEvent.VK_TAB, 0));
         no.setFocusTraversalKeys (KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, s);
 
+        yes.registerKeyboardAction(
+                yes.getActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false)),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
+                JComponent.WHEN_FOCUSED);
+
+        no.registerKeyboardAction(
+                no.getActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false)),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
+                JComponent.WHEN_FOCUSED);
+
+        yes.registerKeyboardAction(
+                yes.getActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true)),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
+                JComponent.WHEN_FOCUSED);
+
+        no.registerKeyboardAction(
+                no.getActionForKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true)),
+                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
+                JComponent.WHEN_FOCUSED);
+
         ml.setVisible(true);
         this.setVisible(true);
         this.getOwner().setFocusable(false);

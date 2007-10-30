@@ -71,9 +71,9 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 			leafRenderer.setBackground(textBackground);
 		}
 
-		if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
-			Object userObject = ((DefaultMutableTreeNode) value)
-					.getUserObject();
+        if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
+            Object userObject = ((DefaultMutableTreeNode) value)
+                    .getUserObject();
             if (userObject instanceof CheckBoxNode) {
                 CheckBoxNode node = (CheckBoxNode) userObject;
                 leafRenderer.setText(node.getText());
@@ -84,7 +84,7 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
                     if (((MenuListModel) tree.getModel()).getMarkedItems().containsValue(owner))
                         leafRenderer.setForeground(marked);
                 }
-		}
+            }
 
             if (userObject instanceof CheckBoxNode) {
                 CheckBoxNode node = (CheckBoxNode) userObject;
