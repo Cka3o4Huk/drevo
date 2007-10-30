@@ -43,7 +43,7 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 		Boolean booleanValue = (Boolean) UIManager
 				.get("Tree.drawsFocusBorderAroundIcon");
 		leafRenderer.setFocusPainted((booleanValue != null)
-				&& (booleanValue));
+				&& (booleanValue.booleanValue()));
 
         selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
 		selectionForeground = UIManager.getColor("Tree.selectionForeground");
@@ -100,9 +100,6 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 
             }
         }
-
-        }
-
     return leafRenderer;
 	}
 }
