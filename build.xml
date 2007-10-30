@@ -1,0 +1,66 @@
+<!--
+Build file for FSM (File System Monitor)
+Author: Michail Zhilin
+-->
+<project name="File System Monitor" default="build" >
+	<property name="SOURCE_DIR" value="src"/>
+	<property name="COMPILE_DIR" value="classes"/>
+	<property name="BUILD_DIR"  value="build"/>
+    <property name="JDOM_JAR" value="lib/jdom.jar"/>
+    <property name="JAXEN_JAR" value="lib/jaxen.jar"/>
+    <property name="LIBS_DIR" value="lib/"/>
+
+    <condition property="isUnix">
+        <os family="unix"/>
+    </condition>
+
+    <condition  property="JDOM_JAR" value="/usr/local/share/java/classes/jdom.jar">
+        <equals arg1="${isUnix}" arg2="true"/>
+    </condition>
+
+    <condition property="LIBS_DIR" value="/usr/local/share/java/classes/">
+        <equals arg1="${isUnix}" arg2="true"/>
+    </condition>
+
+    <echo message="${JDOM_JAR}"/>
+
+    <path id="project.class.path">
+        <fileset dir="${LIBS_DIR}">
+           <include name="**/*.jar"/>
+         </fileset>
+    	<pathelement location="${BUILD_DIR}/fsm.jar"/>
+	    <pathelement location="${JDOM_JAR}"/>    	
+    	<pathelement path="${java.class.path}/"/>
+    </path>
+	
+	<property name="STARTUP_CLASS"  value="ru.ixxo.crux.manager.Manager"/>
+
+    <target name="init">
+        <mkdir dir="${COMPILE_DIR}"/>
+        <mkdir dir="${BUILD_DIR}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac debug="yes" srcdir="${SOURCE_DIR}" sourcepath="${SOURCE_DIR}" destdir="${COMPILE_DIR}" classpath="${JDOM_JAR}:${JAXEN_JAR}"/>
+    </target>
+
+    <target name="build" depends="compile,manifest">
+        <jar manifest="${BUILD_DIR}/manifest.mf" basedir="${COMPILE_DIR}" destfile="${BUILD_DIR}/fsm.jar"/>
+    </target>
+
+    <target name="manifest">
+        <manifest file="${BUILD_DIR}/manifest.mf">
+            <attribute name="Main-Class" value="${STARTUP_CLASS}"/>
+        </manifest>
+    </target>
+
+    <target name="clean">
+        <delete dir="${COMPILE_DIR}"/>
+    </target>
+
+    <target name="run" depends="build,clean">        	
+        <java classname="${STARTUP_CLASS}" fork="true">   
+        	<classpath refid="project.class.path"/>
+    	</java>    	
+    </target>
+</project>
