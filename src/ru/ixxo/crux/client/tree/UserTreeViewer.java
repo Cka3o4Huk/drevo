@@ -1,9 +1,5 @@
 package ru.ixxo.crux.client.tree;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.jdom.Attribute;
@@ -12,6 +8,7 @@ import org.jdom.Element;
 import ru.ixxo.crux.client.tree.enhance.ComplexNode;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeEditor;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeRenderer;
+import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
 
 import javax.swing.tree.*;
 import java.awt.event.MouseAdapter;
