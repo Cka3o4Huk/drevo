@@ -2,6 +2,10 @@ package ru.ixxo.crux.client.tree.enhance;
 
 import ru.ixxo.crux.client.tree.MenuListModel;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
@@ -13,9 +17,7 @@ import javax.swing.*;
 import ru.ixxo.crux.common.Logger;
 
 public class CheckBoxNodeRenderer implements TreeCellRenderer {
-
-	 private ComplexNode leafRenderer = new ComplexNode();
-    //private JCheckBox leafRenderer = new JCheckBox();
+	private JCheckBox leafRenderer = new ComplexNode();
 
     public DefaultMutableTreeNode getOwner()
     {
@@ -25,7 +27,7 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
     private DefaultMutableTreeNode owner;
 
     Color selectionBorderColor, selectionForeground, selectionBackground,
-			textForeground, textBackground, marked;
+            textForeground, textBackground, marked;
 
 	protected JCheckBox getLeafRenderer() {
         return leafRenderer;
@@ -72,11 +74,16 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 		if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
 			Object userObject = ((DefaultMutableTreeNode) value)
 					.getUserObject();
-			if (userObject instanceof ComplexNode) {
-				ComplexNode node = (ComplexNode) userObject;
-				leafRenderer.setText(node.getText());
-				leafRenderer.setState(node.getState());
-			}
+            if (userObject instanceof CheckBoxNode) {
+                CheckBoxNode node = (CheckBoxNode) userObject;
+                leafRenderer.setText(node.getText());
+                leafRenderer.setSelected(node.isSelected());
+                if (tree.getModel() instanceof MenuListModel) {
+                    if (((MenuListModel) tree.getModel()).getSelectedItems().containsValue(owner))
+                        leafRenderer.setSelected(true);
+                    if (((MenuListModel) tree.getModel()).getMarkedItems().containsValue(owner))
+                        leafRenderer.setForeground(marked);
+                }
 		}
 
             if (userObject instanceof CheckBoxNode) {
@@ -94,6 +101,8 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
             }
         }
 
-        return leafRenderer;
+        }
+
+    return leafRenderer;
 	}
 }
