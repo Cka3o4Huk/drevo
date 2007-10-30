@@ -1,9 +1,15 @@
 package ru.ixxo.crux.client.tree;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
-import ru.ixxo.crux.client.tree.enhance.CheckBoxNode;
+import ru.ixxo.crux.client.tree.enhance.ComplexNode;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeEditor;
 import ru.ixxo.crux.client.tree.enhance.CheckBoxNodeRenderer;
 
@@ -50,7 +56,6 @@ public class UserTreeViewer extends XMLTreeViewer
 	}
 
     class MyMouseAdapter extends MouseAdapter  {
-
     public void mousePressed(MouseEvent e) {
         if (e.getButton()!=MouseEvent.BUTTON1) return;
         TreePath path = xmlTree.getPathForLocation(e.getX(), e.getY());
@@ -97,7 +102,7 @@ public class UserTreeViewer extends XMLTreeViewer
 			nodeName = fileName + " [size = " + size + "]";
 		}
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode(nodeName);
-		node.setUserObject(new CheckBoxNode(nodeName, false, node));
+		node.setUserObject(new ComplexNode(nodeName));
 		return node;
 	}
 

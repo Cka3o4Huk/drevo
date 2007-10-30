@@ -6,10 +6,16 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import ru.ixxo.crux.common.Logger;
 
 public class CheckBoxNodeRenderer implements TreeCellRenderer {
 
-    private JCheckBox leafRenderer = new JCheckBox();
+	 private ComplexNode leafRenderer = new ComplexNode();
+    //private JCheckBox leafRenderer = new JCheckBox();
 
     public DefaultMutableTreeNode getOwner()
     {
@@ -63,9 +69,15 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 			leafRenderer.setBackground(textBackground);
 		}
 
-        if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
-            owner = (DefaultMutableTreeNode) value;
-            Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
+		if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
+			Object userObject = ((DefaultMutableTreeNode) value)
+					.getUserObject();
+			if (userObject instanceof ComplexNode) {
+				ComplexNode node = (ComplexNode) userObject;
+				leafRenderer.setText(node.getText());
+				leafRenderer.setState(node.getState());
+			}
+		}
 
             if (userObject instanceof CheckBoxNode) {
                 CheckBoxNode node = (CheckBoxNode) userObject;
