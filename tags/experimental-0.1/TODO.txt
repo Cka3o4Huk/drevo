@@ -1,0 +1,21 @@
+TODO List:
+ 1) Improve GUI part (Swing Interface)
+ 	b) Indefinite progress bar (10 points)
+ 	c) Tree shouldn't recreated after each change. Need to modify existed tree and repaint it. (15 points)
+ 	d) Minimize repaint operation (5 points)
+	e) Sort files and directories by name and type (5 points)
+	g) Resizing of the window should provoke resizing of content (15 points)
+	i) Vertical button toolbar on right side (10 points)
+	j) Hybrid of node's tree and table (25 points)
+	k) Button implementations:
+		1) Start/stop (7 points)
+		2) Refresh (7 points)
+		3) Unmark All (4 points)
+		4) Delete & Cancel & Complete - 2 buttons (20 points)
+ 	l) Resizing of the window - to fix current problems (10 points)
+
+ 2) Improve EngineManage & Dispatcher for stable work
+ 	b) Support collection of load information (threads working/process percentage)
+ 	
+ 3) Improve WorkThread
+ 	b) Experiment with JNI realization of collection information about FS.
