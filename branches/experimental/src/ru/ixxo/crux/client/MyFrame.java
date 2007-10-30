@@ -9,8 +9,10 @@ import ru.ixxo.crux.manager.Manager;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class MyFrame extends JFrame {
     /**
@@ -78,6 +80,8 @@ public class MyFrame extends JFrame {
     Container contentPane;
 
     XMLTreeViewer treeViewer;
+
+    ArrayList<String> paths = new ArrayList<String>();
 
     public MyFrame(Manager man) {
         this.man = man;
@@ -344,10 +348,10 @@ public class MyFrame extends JFrame {
                 Logger.info("Show JFileChooser");
                 int returnVal = fileChooser.showOpenDialog(this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    targetDirectory = fileChooser.getSelectedFile()
-                            .getAbsolutePath();
+                    targetDirectory = fileChooser.getSelectedFile().getAbsolutePath();
                 }
                 if (targetDirectory == null) break;
+                paths.add(targetDirectory);
                 Logger.info("Text entered: " + targetDirectory);
                 sendDirName(targetDirectory);
                 jsp.add(tree);
@@ -387,6 +391,23 @@ public class MyFrame extends JFrame {
 
                 break;
         }
+
+    }
+
+    private void processDeletion(){
+        HashMap<String, DefaultMutableTreeNode> marked = ((MenuListModel)tree.getModel()).getMarkedItems();
+        Set keys = marked.keySet();
+        //((DefaultMutableTreeNode)marked.values().toArray()[0]).is;
+        Comparator<DefaultMutableTreeNode> mycomp = new Comparator<DefaultMutableTreeNode>()
+        {
+            public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2)
+            {
+                return (int)Math.signum(o1.getLevel()-o2.getLevel());
+            }
+        };
+        DefaultMutableTreeNode[] sorted = (DefaultMutableTreeNode[])marked.values().toArray();
+        Arrays.sort(sorted, mycomp);
+        
 
     }
 
