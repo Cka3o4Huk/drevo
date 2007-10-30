@@ -65,7 +65,7 @@ public class UserTreeViewer extends XMLTreeViewer
             CheckBoxNode selectable = (CheckBoxNode) userObject;
             if (model instanceof MenuListModel) {
                 MenuListModel mod = (MenuListModel) model;
-                mod.setSelected(selectable, !selectable.isSelected());
+                mod.setSelected((DefaultMutableTreeNode) data, !selectable.isSelected());
             }
             repaint();
         }

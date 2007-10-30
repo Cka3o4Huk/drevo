@@ -12,12 +12,9 @@ public class CheckBoxNode {
 
     private JCheckBox item = new JCheckBox();
 
-    public DefaultMutableTreeNode owner  = null;
-
     public CheckBoxNode(String text, boolean selected, DefaultMutableTreeNode owner) {
         item.setText(text);
         item.setSelected(selected);
-        this.owner = owner;
     }
 
     public boolean isSelected() {
