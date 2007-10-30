@@ -353,6 +353,14 @@ public class MyFrame extends JFrame {
                 if (targetDirectory == null) break;
                 paths.add(targetDirectory);
                 Logger.info("Text entered: " + targetDirectory);
+                if (treeViewer != null && treeViewer instanceof UserTreeViewer)
+                    if (tree.getModel() instanceof MenuListModel)
+                    {
+                        ((MenuListModel)tree.getModel()).uncheckAll();
+                        ((MenuListModel)tree.getModel()).unmark();
+                        buttons[Buttons.UNCHECK.ordinal()].setEnabled(false);
+                        buttons[Buttons.CANCEL.ordinal()].setEnabled(false);
+                    }
                 sendDirName(targetDirectory);
                 jsp.add(tree);
                 progressBar.setString("Please wait. Process can occupy some minutes");

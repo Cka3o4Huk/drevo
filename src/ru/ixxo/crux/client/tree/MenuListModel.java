@@ -19,7 +19,11 @@ import java.util.List;
  */
 public class MenuListModel extends DefaultTreeModel{
 
-    HashMap<String,CheckBoxNode> selectedItems = new HashMap<String,CheckBoxNode>();
+    public HashMap<String, DefaultMutableTreeNode> getSelectedItems() {
+        return selectedItems;
+    }
+
+    HashMap<String,DefaultMutableTreeNode> selectedItems = new HashMap<String,DefaultMutableTreeNode>();
 
     public HashMap<String, DefaultMutableTreeNode> getMarkedItems() {
         return markedItems;
@@ -31,49 +35,56 @@ public class MenuListModel extends DefaultTreeModel{
         super(root);
     }
 
-    public void setSelected(CheckBoxNode data, boolean selected) {
-        data.setSelected(selected);
-        String str = data.getText();
+    public void setSelected(DefaultMutableTreeNode data, boolean selected) {
+        //data.setSelected(selected);
+        String str = ((CheckBoxNode)data.getUserObject()).getText();
         str = str.substring(0, str.lastIndexOf('[')-1);
         if (selected) selectedItems.put(str,data);
         else {
-            data.owner = selectedItems.get(str).owner;
+            //data.owner = selectedItems.get(str).owner;
             selectedItems.remove(str);
         }
     }
 
-    public List getSelected() {
-        List res = new ArrayList();
-        for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
-            Object data = it.next();
-            if (data instanceof CheckBoxNode && ((CheckBoxNode)data).isSelected()) {
-                res.add(((CheckBoxNode)data).getItem());
-            }
-        }
-        return res;
-    }
+//    public List getSelected() {
+//        List res = new ArrayList();
+//        for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
+//            Object data = it.next();
+//            if (data instanceof CheckBoxNode && ((CheckBoxNode)data).isSelected()) {
+//                res.add(((CheckBoxNode)data).getItem());
+//            }
+//        }
+//        return res;
+//    }
 
     public boolean isNothingChecked() {
-        for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
-            if (((CheckBoxNode)it.next()).isSelected()) return false;
-        }
-        return true;
+//        for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
+//            if (((CheckBoxNode)it.next()).isSelected()) return false;
+//        }
+//        return true;
+        return (selectedItems.size()==0);
     }
 
     public void uncheckAll(){
+//        for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
+//            CheckBoxNode ch = (CheckBoxNode)it.next();
+//            if (ch.owner!=null)
+//                ch.owner.setUserObject(new CheckBoxNode(ch.getText().
+//                        substring(0, ch.getText().lastIndexOf(']')+1), false, ch.owner));
+//        }
+
         for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
-            CheckBoxNode ch = (CheckBoxNode)it.next();
-            if (ch.owner!=null)
-                ch.owner.setUserObject(new CheckBoxNode(ch.getText().
-                        substring(0, ch.getText().lastIndexOf(']')+1), false, ch.owner));
+            CheckBoxNode ch = (CheckBoxNode)((DefaultMutableTreeNode)it.next()).getUserObject();
+            ch.setSelected(false);
         }
         selectedItems.clear();
     }
 
     public void mark(){
         for (Iterator it = selectedItems.values().iterator(); it.hasNext();) {
-            CheckBoxNode ch = (CheckBoxNode)it.next();
-            markedItems.put(ch.getText().substring(0, ch.getText().lastIndexOf('[')-1), ch.owner);
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) it.next();
+            CheckBoxNode ch = (CheckBoxNode)node.getUserObject();
+            markedItems.put(ch.getText().substring(0, ch.getText().lastIndexOf('[')-1), node);
         }
     }
 
