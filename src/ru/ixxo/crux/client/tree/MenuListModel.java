@@ -10,13 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: xiva
- * Date: 27.10.2007
- * Time: 1:19:27
- * To change this template use File | Settings | File Templates.
- */
 public class MenuListModel extends DefaultTreeModel{
 
     public HashMap<String, DefaultMutableTreeNode> getSelectedItems() {
@@ -39,10 +32,14 @@ public class MenuListModel extends DefaultTreeModel{
         //data.setSelected(selected);
         String str = ((CheckBoxNode)data.getUserObject()).getText();
         str = str.substring(0, str.lastIndexOf('[')-1);
-        if (selected) selectedItems.put(str,data);
+        if (selected) {
+            selectedItems.put(str,data);
+            ((CheckBoxNode)data.getUserObject()).setSelected(true);
+        }
         else {
             //data.owner = selectedItems.get(str).owner;
             selectedItems.remove(str);
+            ((CheckBoxNode)data.getUserObject()).setSelected(false);
         }
     }
 

@@ -415,6 +415,18 @@ public class MyFrame extends JFrame {
         };
         DefaultMutableTreeNode[] sorted = (DefaultMutableTreeNode[])marked.values().toArray();
         Arrays.sort(sorted, mycomp);
+        int firstLevelNode;
+        StringBuffer pathToDelete = new StringBuffer();
+        for (int i = 0; i < sorted.length; i++)
+        {
+            firstLevelNode = ((DefaultMutableTreeNode)sorted[i].getRoot()).getIndex(sorted[i].getPath()[1]);
+            pathToDelete.setLength(0);
+            pathToDelete.append(paths.toArray()[firstLevelNode]);
+            
+
+
+        }
+        //sorted[0].get
         
 
     }
