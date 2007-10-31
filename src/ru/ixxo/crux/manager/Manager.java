@@ -126,15 +126,16 @@ public class Manager
 	         */
 	        if (newEngFlag != engflag) {
 
-				if (newEngFlag) {
-					/**
-					 * Tree Request
-					 */
-						XMLTreeViewer tree = requestTree();
+                if (newEngFlag) {
+                    /**
+                     * Tree Request
+                     */
+                    XMLTreeViewer tree = requestTree();
+                    mf.isStopButton = false;
 
-					if (tree != null)
-						repaintTree(mf, tree);
-				}
+                    if (tree != null)
+                        repaintTree(mf, tree);
+                }
 
 				engflag = newEngFlag;
 			}
@@ -171,7 +172,13 @@ public class Manager
     }
     
     protected void repaintTree(MyFrame mf, XMLTreeViewer tree){
-		mf.drawJTree(tree);
+        try
+        {
+            mf.drawJTree(tree);
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         if(!mf.isDisplayable()){
         	mf.setVisible(true);
         }
@@ -196,6 +203,17 @@ public class Manager
         em.interruptThreads();
         em.interrupt();
         System.exit(0);
+    }
+
+    public void pauseThreads(){
+        em.interruptThreads();
+        em.interrupt();
+        reloadTree();
+    }
+
+    public void resumeThreads(){
+        em.run();
+        em.createThreads();
     }
 
 }

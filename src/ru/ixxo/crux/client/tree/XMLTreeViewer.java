@@ -26,8 +26,8 @@ public class XMLTreeViewer extends JFrame {
 	 */
 	private static final long serialVersionUID = -738722273625654365L;
 
-	// The JTree to display the XML
-	protected static JTree xmlTree = null;
+    // The JTree to display the XML
+	protected static JCTree xmlTree = null;
 
 	private HashMap hm = new HashMap();
 
@@ -57,7 +57,7 @@ public class XMLTreeViewer extends JFrame {
 
 	protected void initialize() {
 		if (xmlTree == null) {
-			xmlTree = new JTree();
+			xmlTree = new JCTree();
 			xmlTree.setName("XML Tree");
 			tn = new DefaultMutableTreeNode("XML");
 		}

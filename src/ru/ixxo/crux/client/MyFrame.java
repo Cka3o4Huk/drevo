@@ -3,6 +3,7 @@ package ru.ixxo.crux.client;
 import ru.ixxo.crux.client.tree.UserTreeViewer;
 import ru.ixxo.crux.client.tree.XMLTreeViewer;
 import ru.ixxo.crux.client.tree.MenuListModel;
+import ru.ixxo.crux.client.tree.JCTree;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
 import ru.ixxo.crux.manager.Manager;
@@ -68,6 +69,11 @@ public class MyFrame extends JFrame {
 
     JButton[] buttons = new JButton[Buttons.values().length - 1];
 
+    public boolean isStopButton = false;
+
+    ImageIcon[] startStopIcons = {new ImageIcon(Buttons.values()[0].getPathToImage()),
+            new ImageIcon(Buttons.values()[buttons.length].getPathToImage())};
+
     ActionListener toolBarListener = new ActionListener() {
         public void actionPerformed(final ActionEvent e) {
             Logger.info(e.getActionCommand());
@@ -111,8 +117,7 @@ public class MyFrame extends JFrame {
         toolBar.setFloatable(false);
         Dimension buttonDimension = new Dimension(33,33);
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = new JButton(new ImageIcon(Buttons.values()[i]
-                    .getPathToImage()));
+            buttons[i] = new JButton(new ImageIcon(Buttons.values()[i].getPathToImage()));
             buttons[i].setActionCommand(Buttons.values()[i].toString());
             buttons[i].setToolTipText(Buttons.values()[i].getToolTip());
             buttons[i].addActionListener(toolBarListener);
@@ -192,6 +197,19 @@ public class MyFrame extends JFrame {
         RefreshGUI();
     }
 
+    protected void switchStartStop(){
+        if (isStopButton){
+            buttons[0].setIcon(startStopIcons[1]);
+            buttons[0].setActionCommand(Buttons.values()[buttons.length].toString());
+            buttons[0].setToolTipText(Buttons.values()[buttons.length].getToolTip());
+        }
+        else {
+            buttons[0].setIcon(startStopIcons[0]);
+            buttons[0].setActionCommand(Buttons.values()[0].toString());
+            buttons[0].setToolTipText(Buttons.values()[0].getToolTip());
+        }
+    }
+
     final String DEV_XML_VIEW = "Developer XML View";
 
     final String USR_VIEW = "User-friendly View";
@@ -253,14 +271,13 @@ public class MyFrame extends JFrame {
         }
     }
 
-    public void drawJTree(XMLTreeViewer treeViewer) {
+    public void drawJTree(XMLTreeViewer treeViewer) throws CloneNotSupportedException {
 
         if (tree == null) {
             Logger.info("Setting new tree");
             this.treeViewer = treeViewer;
-            tree = treeViewer.getJTree();
+            tree = (JTree)((JCTree)treeViewer.getJTree()).clone();
             jsp.setViewportView(tree);
-            progressBar.setVisible(false);
             tree.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent me) {
                     doMouseClicked(me);
@@ -274,9 +291,11 @@ public class MyFrame extends JFrame {
             jsp.setViewportView(tree);
             tree.setVisible(false);
             tree.setVisible(true);
+        }
+        switchStartStop();
+        if (!isStopButton){
             progressBar.setVisible(false);
         }
-
     }
 
     public void RefreshGUI() {
@@ -362,6 +381,8 @@ public class MyFrame extends JFrame {
                         buttons[Buttons.CANCEL.ordinal()].setEnabled(false);
                     }
                 sendDirName(targetDirectory);
+                isStopButton = true;
+                switchStartStop();
                 jsp.add(tree);
                 progressBar.setString("Please wait. Process can occupy some minutes");
                 progressBar.setStringPainted(true);
@@ -370,8 +391,13 @@ public class MyFrame extends JFrame {
                 RefreshGUI();
                 break;
             case STOP:
+                isStopButton = false;
+                //switchStartStop();
+                man.setUserFlag(false);
+                man.pauseThreads();
                 break;
             case REFRESH:
+                man.reloadTree();
                 break;
             case UNCHECK:
                 ((MenuListModel)tree.getModel()).uncheckAll();
