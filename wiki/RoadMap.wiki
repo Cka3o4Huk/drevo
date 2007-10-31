@@ -21,4 +21,8 @@ Rating of verified issues
 || 4 ||	scriptech.fr|| *1* || || || ||
 || 14 || scriptech.fr || *6* || || || ||
 || 24 || scriptech.fr || *1* || || || ||
-|| Total || || *8* ||  ||  ||  ||
+|| 23 || xivaxy ||  || *3+1* || || ||
+|| 18 || scriptech.fr || *3* || || || ||
+|| 6 || xivaxy || || *6* || || ||
+|| 22 || scriptech.fr || *2* || *1* || || ||
+|| Total || || *13* || *11* ||  ||  ||
