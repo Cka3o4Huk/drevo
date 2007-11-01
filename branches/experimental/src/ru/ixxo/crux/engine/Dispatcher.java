@@ -117,7 +117,7 @@ public class Dispatcher
 					 * Return current tree
 					 */
 					// JTree result = new JTree(tree);
-					this.doCalcSize(resultTree);
+					
 					XMLTreeViewer viewer;
 				//	Logger.info(new XMLOutputter().outputString(resultTree));
 					if (((viewMode == UNDEF_VIEW) && (Logger.debug)) 
@@ -142,25 +142,7 @@ public class Dispatcher
 		}
 	}
 
-	public int doCalcSize(Element tree){
-		int size=0;
-		try{
-			if (tree.getAttributeValue("size").equalsIgnoreCase("null")) size=0;
-			size=Integer.parseInt(tree.getAttributeValue("size"));
-		}catch(Exception e){}
-		if (size==0){
-			Object obj;
-			List l=tree.getChildren();
-			Iterator it = l.iterator();
-			while(it.hasNext()){
-				obj=it.next();
-				if(obj instanceof Element)
-					size+=doCalcSize((Element)obj);
-			}
-		}
-		tree.setAttribute("size",new Integer(size).toString());
-		return size;
-	}
+	
 	
 	public synchronized String callEngine(Object obj) {
 
