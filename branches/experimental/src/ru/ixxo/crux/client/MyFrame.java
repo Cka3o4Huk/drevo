@@ -5,7 +5,8 @@ import ru.ixxo.crux.client.tree.XMLTreeViewer;
 import ru.ixxo.crux.client.tree.MenuListModel;
 import ru.ixxo.crux.client.tree.JCTree;
 import ru.ixxo.crux.common.Logger;
-import ru.ixxo.crux.engine.Dispatcher;
+//import ru.ixxo.crux.engine.Dispatcher;
+import ru.ixxo.crux.engine.providers.EvaluateSizeProvider;
 import ru.ixxo.crux.manager.Manager;
 
 import javax.swing.*;
@@ -42,6 +43,8 @@ public class MyFrame extends JFrame {
     JProgressBar progressBar;
 
     JToolBar toolBar;
+    
+    EvaluateSizeProvider espr;
 
     private static enum Buttons {
         START("Start scanning"), REFRESH("Refresh tree"), UNCHECK("Uncheck all"), DELETE(
@@ -91,6 +94,7 @@ public class MyFrame extends JFrame {
 
     public MyFrame(Manager man) {
         this.man = man;
+        this.espr = man.getEvaluateSizeProvider();
         layout = new BorderLayout();
         contentPane = this.getContentPane();
         setPreferredSize(preferredSize);
@@ -225,10 +229,10 @@ public class MyFrame extends JFrame {
                 try {
                     String strCmd = e.getActionCommand();
                     if (DEV_XML_VIEW.equalsIgnoreCase(strCmd)) {
-                        man.changeTreeView(Dispatcher.XML_VIEW);
+                        espr.changeTreeView(EvaluateSizeProvider.XML_VIEW);
                     }
                     if (USR_VIEW.equalsIgnoreCase(strCmd)) {
-                        man.changeTreeView(Dispatcher.USER_VIEW);
+                        espr.changeTreeView(EvaluateSizeProvider.USER_VIEW);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -343,8 +347,8 @@ public class MyFrame extends JFrame {
             // File f = new File(text);
             // if ((f.isFile())||(f.isDirectory()))
             // {
-            man.dirname = text;
-            man.setUserFlag(true);
+            espr.dirname = text;
+            espr.setUserFlag(true);
             // }
         } catch (SecurityException e) {
             throw new RuntimeException(e);
@@ -393,11 +397,11 @@ public class MyFrame extends JFrame {
             case STOP:
                 isStopButton = false;
                 //switchStartStop();
-                man.setUserFlag(false);
+                espr.setUserFlag(false);
                 man.pauseThreads();
                 break;
             case REFRESH:
-                man.reloadTree();
+                espr.reloadTree();
                 break;
             case UNCHECK:
                 ((MenuListModel)tree.getModel()).uncheckAll();
