@@ -68,12 +68,17 @@ public class XMLTreeViewer extends JFrame {
 			XPath xp = XPath.newInstance(".//*[@id='new']");
 			List ls = xp.selectNodes(xmlDocRootElement);
 			Iterator it = ls.iterator();
+			boolean flag=false;
 			while (it.hasNext()) {
 				Object obj = it.next();
 				Element el;
 				DefaultMutableTreeNode cn;
 				if (obj instanceof Element) {
 					el = (Element) obj;
+					if (!flag){
+						this.doCalcSize(el);
+						flag=true;
+					}
 					cn = generateNodeByElement(el);
 					obj = el.getParent();
 					if (obj instanceof Element) {
@@ -104,6 +109,25 @@ public class XMLTreeViewer extends JFrame {
 
 	}
 
+	public int doCalcSize(Element tree){
+		int size=0;
+		try{
+			if (tree.getAttributeValue("size").equalsIgnoreCase("null")) size=0;
+			size=Integer.parseInt(tree.getAttributeValue("size"));
+		}catch(Exception e){}
+		if (size==0){
+			Object obj;
+			List l=tree.getChildren();
+			Iterator it = l.iterator();
+			while(it.hasNext()){
+				obj=it.next();
+				if(obj instanceof Element)
+					size+=doCalcSize((Element)obj);
+			}
+		}
+		tree.setAttribute("size",new Integer(size).toString());
+		return size;
+	}
 	public JTree getJTree() {
 		return xmlTree;
 	}
