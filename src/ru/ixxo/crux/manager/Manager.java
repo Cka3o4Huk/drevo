@@ -5,6 +5,7 @@ import ru.ixxo.crux.client.SplashWindow;
 import ru.ixxo.crux.client.tree.XMLTreeViewer;
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
+import ru.ixxo.crux.engine.providers.EvaluateSizeProvider;
 import ru.ixxo.crux.engine.core.EngineManager;
 
 import javax.swing.*;
@@ -16,32 +17,33 @@ import java.util.ArrayList;
  */
 public class Manager
 {
-    private boolean engflag;
-    public final String userFlagMutex = "userFlagMutex"; 
-    private boolean userflag;
-    public  String dirname;
+
     //protected DefaultMutableTreeNode tree;
     private Dispatcher disp;
+    private EvaluateSizeProvider espr;
     protected EngineManager em;
 
-    protected boolean enforceReloadTree = false;
-    
+  
     private Dispatcher getDispatcher(){
     	if (disp==null)
     		disp=new Dispatcher(null);
     	return disp;
     }
+    public EvaluateSizeProvider getEvaluateSizeProvider(){
+    	if (espr==null) {
+    		espr=new EvaluateSizeProvider(getDispatcher());
+    		disp.setEvaluateSizeProvider(espr);
+    	}
+
+    	return espr;
+    }
+    
     public Manager()
     {
-        this.engflag=false;
-        this.userflag=false;
+
     }
 
-    public void setUserFlag(boolean flagValue){
-    	synchronized (userFlagMutex) {
-			userflag = flagValue;
-		}
-    }
+
     
     public static void main(String args[])
     {
@@ -74,12 +76,12 @@ public class Manager
 
         try
         {
-            man.em = new EngineManager(man.getDispatcher());
+            man.em = new EngineManager(man.getEvaluateSizeProvider());
 
         	while (true)
             {
                 Thread.sleep(100);
-                man.handle(mf);
+                man.getEvaluateSizeProvider().handle(mf);
             }
         }
         catch (RuntimeException e)
@@ -96,108 +98,6 @@ public class Manager
     }
 
 
-    /**
-     * 
-     * @param mf
-     */
-    @SuppressWarnings("unchecked")
-	private void handle(MyFrame mf)
-    {
-        synchronized (userFlagMutex) {
-//		
-//	    	Object obj = new Boolean(userflag);
-	
-	        ArrayList sendParameters = new ArrayList();
-	        
-	        if(userflag){
-	        	sendParameters.add(dirname);
-	        }else{
-	        	/**
-	        	 * Tree request
-	        	 */	        	
-	        	sendParameters.add(null);
-	        }
-	        
-	        ArrayList params = (ArrayList) sendParameters.clone();
-	        boolean newEngFlag = disp.callInterface(params);
-	        
-	        /**
-	         * If task was completed then manager should make request tree
-	         */
-	        if (newEngFlag != engflag) {
-
-                if (newEngFlag) {
-                    /**
-                     * Tree Request
-                     */
-                    XMLTreeViewer tree = requestTree();
-                    mf.isStopButton = false;
-
-                    if (tree != null)
-                        repaintTree(mf, tree);
-                }
-
-				engflag = newEngFlag;
-			}
-	        else if(enforceReloadTree)
-			{
-				XMLTreeViewer tree = requestTree();
-
-				if (tree != null)
-					repaintTree(mf, tree);
-				
-				enforceReloadTree = false;
-			}
-	        
-	        userflag = false;
-        }
-    }
-    
-    public XMLTreeViewer requestTree()
-    {
-        ArrayList sendParameters = new ArrayList();
-        ArrayList params;
-        ArrayList receivedParameters;
-        
-    	sendParameters.clear();
-    	sendParameters.add(Boolean.TRUE);
-    	params = (ArrayList) sendParameters.clone();	       	
-    	disp.callInterface(params);
-    	
-    	receivedParameters = params;
-        Object obj = (receivedParameters!=null && receivedParameters.size() > 0) ? 
-       		 receivedParameters.toArray()[0] : null;	
-       		 
-        return (obj != null && obj instanceof XMLTreeViewer)? (XMLTreeViewer) obj: null;
-    }
-    
-    protected void repaintTree(MyFrame mf, XMLTreeViewer tree){
-        try
-        {
-            mf.drawJTree(tree);
-        } catch (CloneNotSupportedException e)
-        {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        if(!mf.isDisplayable()){
-        	mf.setVisible(true);
-        }
-		mf.RefreshGUI();
-    }
-    
-    public void changeTreeView(int viewMode)
-    {
-    	if(disp.viewMode != viewMode){
-    		disp.viewMode = viewMode;
-    		reloadTree();
-    	}
-    }
-    
-    public void reloadTree()
-    {
-    	enforceReloadTree = true;
-    }
-    	
     protected void shutDown()
     {
         em.interruptThreads();
@@ -208,7 +108,7 @@ public class Manager
     public void pauseThreads(){
         em.interruptThreads();
         em.interrupt();
-        reloadTree();
+        espr.reloadTree();
     }
 
     public void resumeThreads(){

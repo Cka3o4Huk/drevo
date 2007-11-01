@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import ru.ixxo.crux.common.Logger;
 import ru.ixxo.crux.engine.Dispatcher;
+import ru.ixxo.crux.engine.providers.EvaluateSizeProvider;
 
 /**
  * Modified by: Cka3o4Huk
@@ -12,7 +13,8 @@ import ru.ixxo.crux.engine.Dispatcher;
 public class EngineManager implements Runnable
 {
     private Thread thread;
-    private Dispatcher disp;
+//    private Dispatcher disp;
+    private EvaluateSizeProvider espr;    
 //    private String dirname;
 
     final int threadcount = 20;
@@ -21,9 +23,9 @@ public class EngineManager implements Runnable
     
     private Vector wthreads;
 
-    public EngineManager(Dispatcher disp)
+    public EngineManager(EvaluateSizeProvider espr)
     {
-        this.disp = disp;
+        this.espr = espr;
 
         thread = new Thread(this, "EngineManager");
         wthreads = new Vector();
@@ -33,7 +35,7 @@ public class EngineManager implements Runnable
 
     private void workHandle()
     {
-        String completed = disp.callEngine(null);
+        String completed = espr.callEngine(null);
         if ("Completed".equals(completed) && isStarted){
         	Logger.info("Stop all threads");        	
         	interruptThreads();
@@ -43,7 +45,7 @@ public class EngineManager implements Runnable
 
     private void manHandle()
     {    	
-        boolean f = disp.callInterface(null);
+        boolean f = espr.callInterface(null);
         if (f)
         {
         	Logger.info("Reload all threads");
@@ -83,7 +85,7 @@ public class EngineManager implements Runnable
         WorkThread wthread;
         for (int i=0; i< threadcount; i++)
         {
-            wthread = new WorkThread(disp, "WorkThread #"+i);
+            wthread = new WorkThread(espr.getDispatcher(), "WorkThread #"+i);
             wthreads.add(wthread);
         }
         isStarted = true;
