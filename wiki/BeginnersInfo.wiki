@@ -61,7 +61,7 @@ _ant run_
 =====Release Lock - разблокировка файлов=====
 
 *Важно!* При выполнении Commit в поле Message оставляйте комментарий с указанием номера задачи (Issue ID) и ссылкой на ее описание.
-Вот образец: "_Issue #8 (http://code.google.com/p/drevo/issues/detail?id=8)_".
+Вот образец: "_ Issue #8 (http://code.google.com/p/drevo/issues/detail?id=8) _".
 
 
 При выполнении Update и Commit возможно возникновение так называемых конфликтов. Это случай, когда изменения нескольких участников перекрываются, и Subversion или SVN не может самостоятельно обновить файлы. Про разрешение конфликтов можно почитать здесь: http://tortoisesvn.net/docs/release/TortoiseSVN_ru/tsvn-dug-conflicts.html.
