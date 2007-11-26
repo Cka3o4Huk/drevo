@@ -1,6 +1,5 @@
 #summary Информация для новичков проекта
 #labels Language-Russian,Phase-Requirements
-=Информация для новичков=
 
 ==Программные средства==
 
