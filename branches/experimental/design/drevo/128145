@@ -1,0 +1,156 @@
+format 48
+"application" // application
+  revision 1
+  modified_by 17 "xiva"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default
+  
+  classview 128145 "cv2"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default
+    classdiagram 128145 "cd2"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+      size A4
+    end
+
+    class 128785 "Manager"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129041 // <unidirectional association>
+	relation 129041 --->
+	  a role_name "" protected
+	    classrelation_ref 129041 // <unidirectional association>
+	  b parent class_ref 129681 // XMLTreeView
+      end
+
+      classrelation 129169 // <unidirectional association>
+	relation 129169 --->
+	  a role_name "" protected
+	    classrelation_ref 129169 // <unidirectional association>
+	  b parent class_ref 128401 // XMLTree
+      end
+
+      classrelation 129297 // <unidirectional association>
+	relation 129297 --->
+	  a role_name "" protected
+	    classrelation_ref 129297 // <unidirectional association>
+	  b parent class_ref 128401 // XMLTree
+      end
+
+      classrelation 130065 // <unidirectional association>
+	relation 129937 --->
+	  a role_name "" protected
+	    classrelation_ref 130065 // <unidirectional association>
+	  b parent class_ref 128273 // MainFrame
+      end
+
+      classrelation 131217 // <unidirectional association>
+	relation 130833 --->
+	  a role_name "" protected
+	    classrelation_ref 131217 // <unidirectional association>
+	  b parent class_ref 128145 // Dispatcher
+      end
+
+      operation 130065 "processEvent"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 129553 "XMLTreeModel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 129681 "XMLTreeView"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128913 // <unidirectional association>
+	relation 128913 --->
+	  a role_name "" protected
+	    classrelation_ref 128913 // <unidirectional association>
+	  b parent class_ref 128401 // XMLTree
+      end
+
+      classrelation 129425 // <dependency>
+	relation 129425 -_->
+	  a default
+	    classrelation_ref 129425 // <dependency>
+	  b parent class_ref 129809 // XMLTreeViewFactory
+      end
+
+      classrelation 129553 // <unidirectional association>
+	relation 129553 --->
+	  a role_name "" protected
+	    classrelation_ref 129553 // <unidirectional association>
+	  b parent class_ref 129809 // XMLTreeViewFactory
+      end
+
+      classrelation 129937 // <aggregation by value>
+	relation_ref 129809 // <aggregation by value>
+      end
+
+      operation 131089 "showTree"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+  end
+end
