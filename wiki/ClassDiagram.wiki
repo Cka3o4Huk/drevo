@@ -1,4 +1,3 @@
-#labels Диаграммаклассов
 = Диаграмма классов проекта =
 
 http://drevo.googlecode.com/svn/branches/experimental/Class%20diagram.gif
