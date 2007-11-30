@@ -1,0 +1,13 @@
+#labels Диаграммаклассов
+= Диаграмма классов проекта =
+
+http://drevo.googlecode.com/svn/branches/experimental/Class%20diagram.gif
+
+
+= Пояснения =
+
+На диаграмме показаны основные классы проекта. Listener-ы выделены зеленым цветом, Event-ы - белым, MVC presentation и data layer-ов - соответственно красным и рыжим. 
+Стрелками показаны отношения ассоциации и аггрегации между классами. Перечислены необходимые методы.
+Business Layer непосредственно связан с Presentation layer. FSEvent, DataEvent и ManagerEvent обеспечивают триггерность изменения соответствующих моделей. xxxEvent-ы наследуются от абстрактного класа Event, xxxListener-ы  - от интерфейса Listener. TreeView хранит дерево названий каталогов, возможно с некоторыми аттрибутами. XMLTree представляет это в виде XML-дерева. XMLTreeViewer включает JTree, и позволяет отображать дерево в MainFrame (опять же с нужными параметрами). Диспетчер обеспечивает связь между Data Layer и Presentation/Business Layer. 
+
+Диаграмма создавалась в BOUML 3.3.3 (http://bouml.free.fr). 
