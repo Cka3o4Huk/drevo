@@ -1,0 +1,245 @@
+format 48
+
+classcanvas 128145 class_ref 128017 // ManagerListener
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 575 109 2000
+  end
+classcanvas 128273 class_ref 128145 // Dispatcher
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  xyz 541 378 2000
+  end
+classcanvas 128401 class_ref 128273 // MainFrame
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightred
+  xyz 209 93 2000
+  end
+note 128529 "Presentation Layer"
+  xyzwh 30 140 2000 142 38
+note 128657 "Data layer"
+  xyzwh 38 520 2000 79 35
+note 128785 "Application Layer
+(Business Logic Layer)"
+  xyzwh 14 311 2000 155 53
+classcanvas 128913 class_ref 128401 // XMLTree
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightred
+  xyz 191 343 2000
+  end
+classcanvas 129041 class_ref 128529 // Engine
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color verylightorange
+  xyz 411 607 2000
+  end
+classcanvas 129297 class_ref 128785 // Manager
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightred
+  xyz 355 228 2000
+  end
+classcanvas 129425 class_ref 128913 // ManagerEvent
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 544 183 2000
+  end
+classcanvas 129553 class_ref 129041 // TreeView
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color verylightorange
+  xyz 152 428 2000
+  end
+classcanvas 129681 class_ref 128657 // EngineEvent
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 407 424 2000
+  end
+note 129809 "FileSystem"
+  xyzwh 129 793 2000 170 35
+note 129937 "Client"
+  xyzwh 218 47 2000 88 38
+classcanvas 130705 class_ref 129297 // EngineListener
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 385 488 2000
+  end
+classcanvas 130833 class_ref 129425 // FSModel
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color verylightorange
+  xyz 140 514 2000
+  end
+classcanvas 131473 class_ref 129681 // XMLTreeView
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightred
+  xyz 112 181 2000
+  end
+classcanvas 132625 class_ref 129809 // XMLTreeViewFactory
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightred
+  xyz 160 247 2004
+  end
+classcanvas 135953 class_ref 130065 // DataEvent
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 319 445 2000
+  end
+classcanvas 136081 class_ref 130193 // WorkThread
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color verylightorange
+  xyz 84 712 2000
+  end
+classcanvas 136209 class_ref 130193 // WorkThread
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color verylightorange
+  xyz 233 709 2000
+  end
+classcanvas 136593 class_ref 130321 // FSModelListener
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color green
+  xyz 148 617 2000
+  end
+classcanvas 136721 class_ref 130449 // FSEvent
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 173 671 2000
+  end
+classcanvas 137745 class_ref 130577 // Event
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 310 325 2000
+  end
+classcanvas 139281 class_ref 130833 // GUIEvent
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color white
+  xyz 487 137 2004
+  end
+classcanvas 139537 class_ref 130961 // Listener
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  color lightmediumgreen
+  xyz 712 498 2000
+  end
+relationcanvas 130961 relation_ref 128529 // <unidirectional association>
+  from ref 129553 z 1999 to ref 130833
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131089 relation_ref 128657 // <unidirectional association>
+  from ref 129041 z 1999 to ref 129553
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 131217 relation_ref 128785 // <unidirectional association>
+  from ref 129041 z 1999 to ref 130833
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 132113 relation_ref 129169 // <unidirectional association>
+  from ref 129297 z 1999 to ref 128913
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 132241 relation_ref 129297 // <unidirectional association>
+  from ref 129297 z 1999 to ref 128913
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133265 relation_ref 129681 // <unidirectional association>
+  from ref 132625 z 1999 to ref 128913
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133393 relation_ref 129809 // <aggregation by value>
+  from ref 128401 z 1999 to ref 131473
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133649 relation_ref 129937 // <unidirectional association>
+  from ref 129297 z 1999 to ref 128401
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133777 relation_ref 130065 // <aggregation>
+  from ref 128273 z 1999 to ref 130705
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 133905 relation_ref 130193 // <unidirectional association>
+  from ref 130705 z 1999 to ref 129041
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 134289 relation_ref 130321 // <unidirectional association>
+  from ref 128145 z 1999 to ref 129297
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 134417 relation_ref 130449 // <aggregation>
+  from ref 128273 z 1999 to ref 128145
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 134673 relation_ref 130705 // <unidirectional association>
+  from ref 129041 z 1999 to ref 128273
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 134801 relation_ref 130833 // <unidirectional association>
+  from ref 129297 z 1999 to ref 128273
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 136337 relation_ref 131601 // <unidirectional association>
+  decenter_end 824
+  from ref 130833 z 1999 to point 306 624
+  line 136977 z 1999 to point 311 644
+  line 137617 z 1999 to ref 136209
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 136465 relation_ref 131729 // <unidirectional association>
+  decenter_end 130
+  from ref 130833 z 1999 to point 123 620
+  line 136849 z 1999 to ref 136081
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 137105 relation_ref 131857 // <unidirectional association>
+  decenter_end 128
+  from ref 136081 z 1999 to ref 136593
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 137233 relation_ref 131985 // <unidirectional association>
+  decenter_end 823
+  from ref 136209 z 1999 to ref 136593
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 137361 relation_ref 132113 // <unidirectional association>
+  from ref 136593 z 1999 to ref 130833
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 137873 relation_ref 132241 // <generalisation>
+  from ref 136721 z 1999 to ref 137745
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 138001 relation_ref 132369 // <generalisation>
+  from ref 135953 z 1999 to ref 137745
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 138129 relation_ref 132497 // <generalisation>
+  from ref 129425 z 1999 to ref 137745
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 138257 relation_ref 132625 // <generalisation>
+  from ref 129681 z 1999 to ref 137745
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 138385 relation_ref 132753 // <aggregation>
+  from ref 129553 z 1999 to ref 130705
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 138641 relation_ref 132881 // <unidirectional association>
+  from ref 128401 z 1999 to ref 132625
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 139153 relation_ref 133265 // <directional aggregation>
+  from ref 128401 z 1999 to ref 128145
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 139409 relation_ref 133393 // <generalisation>
+  from ref 139281 z 1999 to ref 137745
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 139665 relation_ref 133521 // <generalisation>
+  from ref 136593 z 1999 to ref 139537
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 139921 relation_ref 133649 // <generalisation>
+  from ref 130705 z 1999 to ref 139537
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+relationcanvas 140049 relation_ref 133777 // <generalisation>
+  from ref 128145 z 1999 to ref 139537
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end

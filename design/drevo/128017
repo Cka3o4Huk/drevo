@@ -1,0 +1,750 @@
+format 48
+"data" // data
+  revision 1
+  modified_by 17 "xiva"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default
+  
+  classview 128017 "cv1"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default
+    classdiagram 128017 "cd1"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_infonote default shadow default
+      size A4
+    end
+
+    class 129041 "TreeView"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128017 // <unidirectional association>
+	relation 128017 --->
+	  a role_name "" protected
+	    classrelation_ref 128017 // <unidirectional association>
+	  b parent class_ref 128657 // EngineEvent
+      end
+
+      classrelation 128529 // <unidirectional association>
+	relation 128529 --->
+	  a role_name "" protected
+	    classrelation_ref 128529 // <unidirectional association>
+	  b parent class_ref 129425 // FSModel
+      end
+
+      classrelation 131345 // <unidirectional association>
+	relation 130961 --->
+	  a role_name "" protected
+	    classrelation_ref 131345 // <unidirectional association>
+	  b parent class_ref 129041 // TreeView
+      end
+
+      classrelation 131473 // <unidirectional association>
+	relation 131089 --->
+	  a role_name "" protected
+	    classrelation_ref 131473 // <unidirectional association>
+	  b parent class_ref 128529 // Engine
+      end
+
+      classrelation 131601 // <aggregation>
+	relation 131217 o---
+	  a role_name "" protected
+	    classrelation_ref 131601 // <aggregation>
+	  b role_name "" protected
+	    classrelation_ref 131729 // <aggregation>
+      end
+
+      classrelation 133265 // <aggregation>
+	relation 132753 o---
+	  a role_name "" protected
+	    classrelation_ref 133265 // <aggregation>
+	  b role_name "" protected
+	    classrelation_ref 133393 // <aggregation>
+      end
+
+      operation 128785 "reload"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 129041 "notifyListeners"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 128017 "ManagerListener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 130577 // <unidirectional association>
+	relation 130321 --->
+	  a role_name "" protected
+	    classrelation_ref 130577 // <unidirectional association>
+	  b parent class_ref 128785 // Manager
+      end
+
+      classrelation 130833 // <aggregation>
+	relation_ref 130449 // <aggregation>
+      end
+
+      operation 129553 "eventOccured"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      classrelation 134545 // <generalisation>
+	relation 133777 ---|>
+	  a public
+	    classrelation_ref 134545 // <generalisation>
+	  b parent class_ref 130961 // Listener
+      end
+    end
+
+    class 128145 "Dispatcher"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      ncouples 2
+      key "" value ""
+      key "" value ""
+      classrelation 130193 // <aggregation>
+	relation 130065 o---
+	  a role_name "" protected
+	    classrelation_ref 130193 // <aggregation>
+	  b role_name "" protected
+	    classrelation_ref 130321 // <aggregation>
+      end
+
+      classrelation 130705 // <aggregation>
+	relation 130449 o---
+	  a role_name "" protected
+	    classrelation_ref 130705 // <aggregation>
+	  b role_name "" protected
+	    classrelation_ref 130833 // <aggregation>
+      end
+
+      operation 128017 "notifyListeners"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 128145 "sendEvent"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 128273 "MainFrame"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129809 // <aggregation by value>
+	relation 129809 *---
+	  a role_name "" protected
+	    classrelation_ref 129809 // <aggregation by value>
+	  b role_name "" protected
+	    classrelation_ref 129937 // <aggregation by value>
+      end
+
+      classrelation 133521 // <unidirectional association>
+	relation 132881 --->
+	  a role_name "" protected
+	    classrelation_ref 133521 // <unidirectional association>
+	  b parent class_ref 129809 // XMLTreeViewFactory
+      end
+
+      classrelation 133649 // <aggregation>
+	relation 133009 o---
+	  a role_name "" protected
+	    classrelation_ref 133649 // <aggregation>
+	  b role_name "" protected
+	    classrelation_ref 133777 // <aggregation>
+      end
+
+      classrelation 134033 // <directional aggregation>
+	relation 133265 o-->
+	  a role_name "" protected
+	    classrelation_ref 134033 // <directional aggregation>
+	  b parent class_ref 128017 // ManagerListener
+      end
+
+      operation 130449 "reloadTree"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 130833 "notifyListeners"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 128401 "XMLTree"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 130961 "getTree"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 128529 "Engine"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128145 // <unidirectional association>
+	relation 128145 --->
+	  a role_name "" protected
+	    classrelation_ref 128145 // <unidirectional association>
+	  b parent class_ref 128657 // EngineEvent
+      end
+
+      classrelation 128273 // <unidirectional association>
+	relation 128273 --->
+	  a role_name "" protected
+	    classrelation_ref 128273 // <unidirectional association>
+	  b parent class_ref 129041 // TreeView
+      end
+
+      classrelation 128657 // <unidirectional association>
+	relation 128657 --->
+	  a role_name "" protected
+	    classrelation_ref 128657 // <unidirectional association>
+	  b parent class_ref 129041 // TreeView
+      end
+
+      classrelation 128785 // <unidirectional association>
+	relation 128785 --->
+	  a role_name "" protected
+	    classrelation_ref 128785 // <unidirectional association>
+	  b parent class_ref 129425 // FSModel
+      end
+
+      classrelation 130961 // <dependency>
+	relation 130577 -_->
+	  a default
+	    classrelation_ref 130961 // <dependency>
+	  b parent class_ref 128145 // Dispatcher
+      end
+
+      classrelation 131089 // <unidirectional association>
+	relation 130705 --->
+	  a role_name "" protected
+	    classrelation_ref 131089 // <unidirectional association>
+	  b parent class_ref 128145 // Dispatcher
+      end
+
+      operation 129937 "processEvent"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 128657 "EngineEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128401 // <unidirectional association>
+	relation 128401 --->
+	  a role_name "" protected
+	    classrelation_ref 128401 // <unidirectional association>
+	  b parent class_ref 129041 // TreeView
+      end
+
+      classrelation 133137 // <generalisation>
+	relation 132625 ---|>
+	  a public
+	    classrelation_ref 133137 // <generalisation>
+	  b parent class_ref 130577 // Event
+      end
+    end
+
+    class 128913 "ManagerEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 133009 // <generalisation>
+	relation 132497 ---|>
+	  a public
+	    classrelation_ref 133009 // <generalisation>
+	  b parent class_ref 130577 // Event
+      end
+    end
+
+    class 129169 "TreeModel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 129297 "EngineListener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 130321 // <aggregation>
+	relation_ref 130065 // <aggregation>
+      end
+
+      classrelation 130449 // <unidirectional association>
+	relation 130193 --->
+	  a role_name "" protected
+	    classrelation_ref 130449 // <unidirectional association>
+	  b parent class_ref 128529 // Engine
+      end
+
+      classrelation 133393 // <aggregation>
+	relation_ref 132753 // <aggregation>
+      end
+
+      operation 129297 "eventOccured"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      classrelation 134417 // <generalisation>
+	relation 133649 ---|>
+	  a public
+	    classrelation_ref 134417 // <generalisation>
+	  b parent class_ref 130961 // Listener
+      end
+    end
+
+    class 129425 "FSModel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132113 // <unidirectional association>
+	relation 131601 --->
+	  a role_name "" protected
+	    classrelation_ref 132113 // <unidirectional association>
+	  b parent class_ref 130193 // WorkThread
+      end
+
+      classrelation 132241 // <unidirectional association>
+	relation 131729 --->
+	  a role_name "" protected
+	    classrelation_ref 132241 // <unidirectional association>
+	  b parent class_ref 130193 // WorkThread
+      end
+
+      operation 129681 "getDir"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 129809 "processEvent"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 130577 "delDir"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 129809 "XMLTreeViewFactory"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129681 // <unidirectional association>
+	relation 129681 --->
+	  a role_name "" protected
+	    classrelation_ref 129681 // <unidirectional association>
+	  b parent class_ref 128401 // XMLTree
+      end
+
+      operation 130705 "getXMLTreeView"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 129937 "DataListener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 131729 // <aggregation>
+	relation_ref 131217 // <aggregation>
+      end
+
+      classrelation 131857 // <generalisation>
+	relation 131345 ---|>
+	  a public
+	    classrelation_ref 131857 // <generalisation>
+	  b parent class_ref 128529 // Engine
+      end
+
+      classrelation 131985 // <unidirectional association>
+	relation 131473 --->
+	  a role_name "" protected
+	    classrelation_ref 131985 // <unidirectional association>
+	  b parent class_ref 128529 // Engine
+      end
+    end
+
+    class 130065 "DataEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132881 // <generalisation>
+	relation 132369 ---|>
+	  a public
+	    classrelation_ref 132881 // <generalisation>
+	  b parent class_ref 130577 // Event
+      end
+    end
+
+    class 130193 "WorkThread"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132369 // <unidirectional association>
+	relation 131857 --->
+	  a role_name "" protected
+	    classrelation_ref 132369 // <unidirectional association>
+	  b parent class_ref 130321 // FSModelListener
+      end
+
+      classrelation 132497 // <unidirectional association>
+	relation 131985 --->
+	  a role_name "" protected
+	    classrelation_ref 132497 // <unidirectional association>
+	  b parent class_ref 130321 // FSModelListener
+      end
+
+      operation 128913 "scanDir"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      attribute 128145 "fsmodelListener"
+	protected explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	idl_decl ""
+      end
+
+      operation 129169 "notifyListeners"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 130321 "FSModelListener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132625 // <unidirectional association>
+	relation 132113 --->
+	  a role_name "" protected
+	    classrelation_ref 132625 // <unidirectional association>
+	  b parent class_ref 129425 // FSModel
+      end
+
+      operation 129425 "eventOccured"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      classrelation 134289 // <generalisation>
+	relation 133521 ---|>
+	  a public
+	    classrelation_ref 134289 // <generalisation>
+	  b parent class_ref 130961 // Listener
+      end
+    end
+
+    class 130449 "FSEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132753 // <generalisation>
+	relation 132241 ---|>
+	  a public
+	    classrelation_ref 132753 // <generalisation>
+	  b parent class_ref 130577 // Event
+      end
+    end
+
+    class 130577 "Event"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128273 "getMessage"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 128401 "setMessage"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 128529 "getType"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      operation 128657 "setType"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+
+    class 130705 "GUIListener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 130193 "eventOccured"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+
+      classrelation 133777 // <aggregation>
+	relation_ref 133009 // <aggregation>
+      end
+
+      classrelation 133905 // <unidirectional association>
+	relation 133137 --->
+	  a role_name "" protected
+	    classrelation_ref 133905 // <unidirectional association>
+	  b parent class_ref 128785 // Manager
+      end
+    end
+
+    class 130833 "GUIEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 134161 // <generalisation>
+	relation 133393 ---|>
+	  a public
+	    classrelation_ref 134161 // <generalisation>
+	  b parent class_ref 130577 // Event
+      end
+    end
+
+    class 130961 "Listener"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 130321 "eventOccured"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+      end
+    end
+  end
+end
